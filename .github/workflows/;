@@ -1,0 +1,35 @@
+name: Lint and run tests
+
+on:
+  push:
+    branches:
+      - feature/*
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+          
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: Lint with Checkstyle
+        run: ./gradlew checkstyleMain checkstyleTest
+        working-directory: ./project-api
+
+      - name: Run tests
+        run: ./gradlew test
+        working-directory: ./project-api
+
+      - name: Build
+        run: ./gradlew build
+        working-directory: ./project-api
