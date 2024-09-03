@@ -1,18 +1,7 @@
 services:
   webapp:
     build: .
-    depends_on:
-      tomcat:
-        condition: service_healthy
-    ports:
-      - "8000:8000"
-
-  tomcat:
-    image: tomcat:8.0
     ports:
       - "8080:8080"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
-      interval: 5s
-      timeout: 10s
-      retries: 3
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]

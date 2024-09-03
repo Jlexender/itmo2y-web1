@@ -9,12 +9,12 @@
     <display-name>web1</display-name>
 
     <servlet>
-        <servlet-name>frontServlet</servlet-name>
-        <servlet-class>ru.lexender.ifmo.web1.FrontServlet</servlet-class>
+        <servlet-name>healthServlet</servlet-name>
+        <servlet-class>ru.lexender.ifmo.web1.health.HealthServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>frontServlet</servlet-name>
-        <url-pattern>/front</url-pattern>
+        <servlet-name>healthServlet</servlet-name>
+        <url-pattern>/health</url-pattern>
     </servlet-mapping>
 </web-app>

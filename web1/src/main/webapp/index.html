@@ -2,11 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index page</title>
+    <title>w1 index</title>
+    <style>
+        :root {
+            --block-gray-color: #363738;
+            --block-darker-gray-color: #454545;
+            --main-white-color: #e1e3e6;
+            --purple-main-color: #7878c8;
+            --blueish-main-color: #93aaff;
+        }
+
+        body {
+            color: var(--main-white-color);
+            background-color: #141414;
+        }
+
+        .container {
+            margin: 2rem;
+            display: flow;
+            justify-content: space-between;
+        }
+
+
+        header {
+            background-color: var(--block-gray-color);
+            font-family: BlinkMacSystemFont, Roboto, sans-serif;
+            padding: 10px;
+            border-radius: 10px;
+            width: 700px;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.5em;
+        }
+
+        ul {
+            gap: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul > li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header h1 {
+            text-align: center;
+        }
+
+        header {
+            transition: box-shadow 0.3s ease;
+        }
+
+        header, form {
+            box-shadow: 0 0 10px rgb(51, 51, 51);
+        }
+
+        header:hover, form:hover {
+            box-shadow: 0 0 10px var(--blueish-main-color);
+        }
+
+        a {
+            color: var(--main-white-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--blueish-main-color);
+        }
+
+        form {
+            background-color: var(--block-gray-color);
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 700px;
+            margin-top: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        form ul {
+            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input, form button {
+            background-color: var(--block-gray-color);
+            color: var(--main-white-color);
+            border: 1px solid var(--block-darker-gray-color);
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-weight: bold;
+            transition: box-shadow 0.3s ease;
+        }
+
+        form input:hover, form button:hover {
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+
+        form input:focus, form button:focus {
+            outline: none;
+            box-shadow: 0 0 3px var(--purple-main-color);
+        }
+
+
+        form button {
+            cursor: pointer;
+        }
+
+        canvas {
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    </style>
+
+    <script type="text/javascript" src="static/cartesian.js" defer></script>
 </head>
 <body>
-    <p>
-        This is the index page.
-    </p>
+    <div class="container">
+        <main>
+            <div class="column">
+                <header>
+                    <h1>Веб-программирование</h1>
+                    <ul>
+                        <li><strong>ФИО:</strong> <a href="https://t.me/Jlexender">Калиев Александр Дмитриевич</a></li>
+                        <li><strong>Группа:</strong> P3111</li>
+                        <li><strong>Вариант:</strong> 21107</li>
+                    </ul>
+                </header>
+                <form method="post" autocomplete="off">
+                    <ul>
+                        <li>
+                            <label for="x"></label>
+                            <input name="x" id="x" placeholder="Координата x" required>
+                        </li>
+                        <li>
+                            <label for="y"></label>
+                            <input name="y" id="y" placeholder="Координата y" required>
+                        </li>
+                        <li>
+                            <label for="R"></label>
+                            <input name="R" id="R" placeholder="Радиус R" required>
+                        </li>
+                        <li>
+                            <button type="submit">Submit!</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="column">
+                <canvas width="600px" height="600px">
+                </canvas>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

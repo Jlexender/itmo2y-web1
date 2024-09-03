@@ -1,4 +1,4 @@
-package ru.lexender.ifmo.web1;
+package ru.lexender.ifmo.web1.health;
 
 
 import jakarta.servlet.ServletException;
@@ -10,7 +10,6 @@ import ru.lexender.ifmo.web1.json.ObjectMapperHolder;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class HealthServlet extends HttpServlet {
     @Override
@@ -18,6 +17,7 @@ public class HealthServlet extends HttpServlet {
             throws ServletException, IOException {
         Map<String, Object> body = new HashMap<>();
         body.put("status", "UP");
+        response.setContentType("application/json");
         response.getWriter().write(ObjectMapperHolder.getInstance().writeValueAsString(body));
         response.setStatus(HttpServletResponse.SC_OK);
     }
