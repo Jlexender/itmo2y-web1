@@ -1,0 +1,6 @@
+services:
+  web1:
+    build:
+        context: .
+        dockerfile: Dockerfile
+

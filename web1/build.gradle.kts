@@ -1,10 +1,12 @@
 plugins {
     id("java")
     id("checkstyle")
+    id("war")
 }
 
 group = "ru.lexender"
 version = "1.0-SNAPSHOT"
+
 
 repositories {
     mavenCentral()
