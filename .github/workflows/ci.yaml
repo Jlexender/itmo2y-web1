@@ -24,12 +24,12 @@ jobs:
 
       - name: Lint with Checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
-        working-directory: ./web1
+        working-directory: ./servlet
 
       - name: Run tests
         run: ./gradlew test
-        working-directory: ./web1
+        working-directory: ./servlet
 
       - name: Build
         run: ./gradlew build
-        working-directory: ./web1
+        working-directory: ./servlet

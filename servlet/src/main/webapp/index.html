@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>web1 index</title>
+
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+    </head>
+    <body>
+        <header>
+            <h1>Лаба 1 итмо прога</h1>
+            <h2>ФИО: Калиев АД</h2>
+            <h2>Группа: P3211</h2>
+            <h2>Вариант: 21107</h2>
+        </header>
+        <main>
+            <div class="coordinates">
+                <form>
+                    <label for="x">X:</label>
+                    <input type="number" id="x" name="x" min="-5" max="5" step="0.1" required>
+                    <label for="y">Y:</label>
+                    <input type="number" id="y" name="y" min="-5" max="5" step="0.1" required>
+                    <label for="r">R:</label>
+                    <input type="number" id="r" name="r" min="1" max="5" step="0.1" required>
+                    <input type="submit" value="Отправить">
+                </form>
+            </div>
+            <div class="plot">
+                <canvas id="plot" style="background: #000000"></canvas>
+            </div>
+            <div class="results">
+                <table>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Результат</th>
+                        <th>Время</th>
+                        <th>Время работы</th>
+                    </tr>
+                    <!-- AJAX will fill this table -->
+                </table>
+            </div>
+        </main>
+    </body>
+</html>
