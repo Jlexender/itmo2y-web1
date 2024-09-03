@@ -1,20 +1,11 @@
 FROM bellsoft/liberica-openjdk-alpine:21 AS builder
 WORKDIR /application
 COPY . .
-RUN --mount=type=cache,target=/root/.gradle  chmod +x gradlew && ./gradlew clean build -x test -x check
+RUN --mount=type=cache,target=/root/.gradle chmod +x gradlew && ./gradlew clean build -x test -x check
 
-FROM bellsoft/liberica-openjre-alpine:21 AS layers
-WORKDIR /application
-COPY --from=builder /application/build/libs/*.jar app.jar
-RUN java -Djarmode=layertools -jar app.jar extract
+FROM tomcat:8.0
+COPY --from=builder /application/build/libs/*.war /usr/local/tomcat/webapps/app.war
 
-FROM bellsoft/liberica-openjre-alpine:21
-VOLUME /tmp
-RUN adduser -S alex
-USER alex
-COPY --from=layers /application/dependencies/ ./
-COPY --from=layers /application/spring-boot-loader/ ./
-COPY --from=layers /application/snapshot-dependencies/ ./
-COPY --from=layers /application/application/ ./
+EXPOSE 8080
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
+CMD ["catalina.sh", "run"]
