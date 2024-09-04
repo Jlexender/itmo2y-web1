@@ -23,20 +23,24 @@
                 </div>
             </header>
             <main>
-                <form>
-                    <label for="x">X:</label>
-                    <input type="number" id="x" name="x" min="-5" max="5" step="0.1" required>
-                    <label for="y">Y:</label>
-                    <input type="number" id="y" name="y" min="-5" max="5" step="0.1" required>
-                    <label for="r">R:</label>
-                    <input type="number" id="r" name="r" min="1" max="5" step="0.1" required>
-                    <button type="submit">Отправить</button>
-                </form>
+                <div class="plot">
+                    <form autocomplete="off">
+                        <label for="x">X:
+                        <input type="number" id="x" name="x" min="-3" max="5" step="1" required>
+                        </label>
+                        <label for="y">Y:
+                        <input type="text" id="y" name="y" required>
+                        </label>
+                        <label for="r">R:
+                        <input type="number" id="r" name="r" min="1" max="3" step="0.5" required>
+                        </label>
+                        <button type="submit">Отправить!</button>
+                    </form>
 
-                <canvas id="canvas" width="400" height="400">
-                    Ваш браузер не поддерживает элемент canvas.
-                </canvas>
-
+                    <canvas id="canvas" width="400" height="400">
+                        Ваш браузер не поддерживает элемент canvas.
+                    </canvas>
+                </div>
                 <table>
                     <thead>
                         <tr>
