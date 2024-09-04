@@ -33,7 +33,7 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "web1/helios-root/*"
+          source: "web1/helios-root/httpd-root,web1/helios-root/deploy.sh"
           target: "$HOME"
 
       - name: Run remote script
