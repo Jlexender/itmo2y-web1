@@ -1,7 +1,7 @@
 #!/bin/sh
 
-killall java
-killall httpd
+pkill -f java
+pkill -f httpd
 
 export JAVA_VERSION=21
 httpd -f $HOME/httpd-root/conf/httpd.conf -k start
