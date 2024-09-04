@@ -27,15 +27,14 @@ jobs:
         working-directory: ./web1
 
       - name: Rsync to the server
-        uses: appleboy/rsync-action@master
+        uses: burnett01/rsync-deployments@v7.0.1
         with:
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          source: "web1/helios-root/"
-          target: "$HOME/"
-          args: "--recursive --links --times --verbose --delete"
+          switches: -avzr --delete
+          path: ./web1/helios-root/
+          remote_path: $HOME/
+          remote_host: ${{ secrets.HOST }}
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key: ${{ secrets.KEY }}
 
       - name: Run remote script
         uses: appleboy/ssh-action@master
