@@ -26,15 +26,16 @@ jobs:
         run: ./gradlew deploy
         working-directory: ./web1
 
-      - name: SCP to the server
-        uses: appleboy/scp-action@master
+      - name: Rsync to the server
+        uses: appleboy/rsync-action@master
         with:
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "./web1/helios-root/"
-          target: "$HOME"
+          source: "web1/helios-root/"
+          target: "$HOME/"
+          args: "--recursive --links --times --verbose --delete"
 
       - name: Run remote script
         uses: appleboy/ssh-action@master
