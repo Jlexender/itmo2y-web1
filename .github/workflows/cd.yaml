@@ -27,7 +27,7 @@ jobs:
         working-directory: ./web1
 
       - name: Rsync to the server
-        uses: burnett01/rsync-deployments@v7.0.1
+        uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
           path: ./web1/helios-root/
