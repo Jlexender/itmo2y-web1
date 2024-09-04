@@ -15,7 +15,7 @@ public class FcgiServer {
                             <title>FastCGI Server</title>
                         </head>
                         <body>
-                            итмо лаба 1 прога
+                            pavel balakshin technologies
                         </body>
                     </html>
                     """;
