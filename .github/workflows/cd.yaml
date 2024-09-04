@@ -29,7 +29,7 @@ jobs:
       - name: Rsync to the server
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete
+          switches: -avzr
           path: ./web1/helios-root/
           remote_path: /home/studs/${{ secrets.USERNAME }}/
           remote_host: ${{ secrets.HOST }}
