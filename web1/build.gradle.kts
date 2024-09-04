@@ -27,7 +27,7 @@ tasks.jar {
     }
 }
 
-tasks.register<Jar>("fatJar") {
+tasks.register<Jar>("deploy") {
     archiveClassifier.set("all")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
@@ -41,4 +41,13 @@ tasks.register<Jar>("fatJar") {
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
+
+    doLast {
+        val targetDir = file("httpd-root/fcgi-bin")
+        if (!targetDir.exists()) {
+            targetDir.mkdirs()
+        }
+        val targetFile = targetDir.resolve("server.jar")
+        archiveFile.get().asFile.copyTo(targetFile, overwrite = true)
+    }
 }

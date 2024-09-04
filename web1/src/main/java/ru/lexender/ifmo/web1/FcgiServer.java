@@ -21,7 +21,7 @@ public class FcgiServer {
                     """;
 
             var response = """
-                    Status: 200 OK
+                    HTTP/1.1 200 OK
                     Content-Type: text/html
                     Content-Length: %d
                     
