@@ -15,7 +15,7 @@ public class FcgiServer {
                             <title>FastCGI Server</title>
                         </head>
                         <body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            итмо лаба 1 прога
                         </body>
                     </html>
                     """;
