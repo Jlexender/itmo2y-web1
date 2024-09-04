@@ -44,4 +44,4 @@ bin/
 
 
 ### Helios binaries
-helios-root/httpd-root/fcgi-bin/**
+helios-root/webapp/fcgi-bin/**
