@@ -1,15 +1,13 @@
-name: Build and SCP to the server
+name: Build and Deploy to the Server
 
 on:
-  push:
-    branches:
-      - dev
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Lint and Run Tests"]
+    types:
+      - completed
 
 jobs:
-  ci:
+  cd:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,8 +37,8 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
             ./deploy.sh
-      
