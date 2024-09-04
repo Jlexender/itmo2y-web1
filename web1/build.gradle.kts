@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("checkstyle")
 }
 
 group = "ru.lexender.ifmo.web1"
@@ -43,11 +44,16 @@ tasks.register<Jar>("deploy") {
     })
 
     doLast {
-        val targetDir = file("httpd-root/fcgi-bin")
+        val targetDir = file("helios-root/httpd-root/fcgi-bin")
         if (!targetDir.exists()) {
             targetDir.mkdirs()
         }
         val targetFile = targetDir.resolve("server.jar")
         archiveFile.get().asFile.copyTo(targetFile, overwrite = true)
     }
+}
+
+tasks.check {
+    dependsOn("checkstyleMain")
+    dependsOn("checkstyleTest")
 }

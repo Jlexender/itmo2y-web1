@@ -41,3 +41,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+### Helios binaries
+helios-root/httpd-root/fcgi-bin/**
