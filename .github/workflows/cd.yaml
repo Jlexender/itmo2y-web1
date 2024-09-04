@@ -8,6 +8,8 @@ jobs:
     uses: ./.github/workflows/ci.yaml
 
   cd:
+    needs: ci
+
     runs-on: ubuntu-latest
 
     steps:
