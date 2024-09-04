@@ -1,12 +1,7 @@
-name: Lint and Run Tests
+name: cicd
 
 on:
-  push:
-    branches:
-      - dev
-  pull_request:
-    branches:
-      - main
+  [workflow_call]
 
 jobs:
   ci:
