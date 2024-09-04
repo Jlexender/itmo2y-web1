@@ -35,6 +35,7 @@ jobs:
           remote_host: ${{ secrets.HOST }}
           remote_user: ${{ secrets.USERNAME }}
           remote_key: ${{ secrets.KEY }}
+          remote_port: ${{ secrets.PORT }}
 
       - name: Run remote script
         uses: appleboy/ssh-action@master
