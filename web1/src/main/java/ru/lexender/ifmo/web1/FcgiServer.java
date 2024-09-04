@@ -15,7 +15,7 @@ public class FcgiServer {
                             <title>FastCGI Server</title>
                         </head>
                         <body>
-                            pavel balakshin technologies
+                            dmitry afanasev technologies
                         </body>
                     </html>
                     """;
