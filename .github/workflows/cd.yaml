@@ -1,10 +1,7 @@
 name: Build and Deploy to the Server
 
 on:
-  workflow_run:
-    workflows: ["Lint and Run Tests"]
-    types:
-      - completed
+  [push]
 
 jobs:
   ci:
