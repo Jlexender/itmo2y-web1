@@ -44,7 +44,7 @@ tasks.register<Jar>("deploy") {
     })
 
     doLast {
-        val targetDir = file("helios-root/httpd-root/fcgi-bin")
+        val targetDir = file("helios-root/webapp/fcgi-bin")
         if (!targetDir.exists()) {
             targetDir.mkdirs()
         }
