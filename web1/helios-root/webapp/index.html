@@ -69,12 +69,11 @@
             $(document).ready(function() {
                 $('form').on('submit', function(event) {
                     event.preventDefault();
-                    console.log("Request sent");
 
                     const template = $('template').contents().clone();
-                    const x = $('#x').val();
-                    const y = $('#y').val();
-                    const r = $('#r').val();
+                    const x = parseFloat($('#x').val());
+                    const y = parseFloat($('#y').val());
+                    const r = parseFloat($('#r').val());
 
                     template.find('td').eq(0).text(x);
                     template.find('td').eq(1).text(y);
