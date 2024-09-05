@@ -1,4 +1,4 @@
-/bin/bash
+#!usr/local/bin/bash
 
 killall java
 killall httpd
