@@ -47,7 +47,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 System.out.println(response);
             } catch (Exception e) {
-                error("Invalid request data: " + e.getMessage());
+                error("Invalid request data");
             }
         }
     }
