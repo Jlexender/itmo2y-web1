@@ -26,12 +26,6 @@ public class RequestHandlerImpl implements RequestHandler {
                 }
                 """;
 
-
-
-
-
-
-
         while (fcgiInterface.FCGIaccept() >= 0) {
             String requestBody;
             try {
@@ -40,14 +34,12 @@ public class RequestHandlerImpl implements RequestHandler {
                 throw new RuntimeException("Can't read request body");
             }
 
-//            CoordinatesDto coordinates = ObjectMapperHolder
-//                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
-//
-//            content = String.format(content, contourService
-//                    .isInsideContour(coordinates.x(), coordinates.y(), coordinates.r())
-//            );
+            CoordinatesDto coordinates = ObjectMapperHolder
+                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
 
-            content = String.format(content, true);
+            content = String.format(content, contourService
+                    .isInsideContour(coordinates.x(), coordinates.y(), coordinates.r())
+            );
 
             var response = """
                     HTTP/1.1 200 OK
