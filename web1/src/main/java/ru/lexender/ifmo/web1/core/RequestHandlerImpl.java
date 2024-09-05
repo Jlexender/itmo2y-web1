@@ -28,10 +28,21 @@ public class RequestHandlerImpl implements RequestHandler {
 
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
-                var requestBody = readRequestBody();
-                error("Test error. Body: " + requestBody);
+                String requestBody = readRequestBody();
+                content = String.format(content, requestBody);
+
+                String response = """
+                        HTTP/2 200 OK
+                        Content-Type: application/json
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                System.out.println(response);
             } catch (Exception e) {
-                error("Invalid request data");
+                error(e.getMessage());
             }
         }
     }
@@ -39,14 +50,15 @@ public class RequestHandlerImpl implements RequestHandler {
     @Override
     public void error(String message) {
         var response = """
-                    HTTP/1.1 400 Bad Request
+                    HTTP/2 400 Bad Request
                     Content-Type: application/json
                     Content-Length: %d
                     
                     {
                         "error": "%s"
                     }
-                    """.formatted(message.length(), message);
+                    
+                    """.formatted(message.getBytes(StandardCharsets.UTF_8).length, message);
 
         System.out.println(response);
     }
