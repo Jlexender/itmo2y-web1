@@ -9,20 +9,14 @@ public class FcgiServer {
         var fcgiInterface = new FCGIInterface();
         while (fcgiInterface.FCGIaccept() >= 0) {
             var content = """
-                    <!DOCTYPE html>
-                    <html>
-                        <head>
-                            <title>FastCGI Server</title>
-                        </head>
-                        <body>
-                            dmitry afanasev technologies
-                        </body>
-                    </html>
+                    {
+                        "result": "Hello, World!"
+                    }
                     """;
 
             var response = """
                     HTTP/1.1 200 OK
-                    Content-Type: text/html
+                    Content-Type: application/json
                     Content-Length: %d
                     
                     %s

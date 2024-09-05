@@ -6,12 +6,12 @@
         <title>Index of Web1</title>
         <link rel="stylesheet" href="static/css/style.css">
         <link rel="stylesheet" href="static/css/normalize.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="static/js/jquery-3.7.1.min.js"></script>
     </head>
     <body>
         <div class="container">
             <header>
-                <h1>итмо прога лаба 1</h1>
+                <h1>Веб 1</h1>
                 <div class="credentials">
                     <ul>
                         <li>Калиев Александр Дмитриевич</li>
@@ -21,48 +21,93 @@
                 </div>
             </header>
             <main>
-                <div class="plot">
+                <div class="plotData">
                     <form autocomplete="off">
                         <label for="x">X:
-                        <input type="number" id="x" name="x" min="-3" max="5" step="1" required>
+                        <input type="number" id="x" name="x" min="-3" max="5" step="1">
                         </label>
                         <label for="y">Y:
-                        <input type="text" id="y" name="y" required>
+                        <input type="text" id="y" name="y">
                         </label>
                         <label for="r">R:
-                        <input type="number" id="r" name="r" min="1" max="3" step="0.5" required>
+                        <input type="number" id="r" name="r" min="1" max="3" step="0.5">
                         </label>
-                        <button type="submit">Отправить!</button>
+                        <button id="submit">Отправить!</button>
                     </form>
 
                     <canvas id="canvas" width="500" height="500">
                     </canvas>
                 </div>
-                <table>
+                <table class="requestData">
                     <thead>
                         <tr>
                             <th>X</th>
                             <th>Y</th>
                             <th>R</th>
                             <th>Результат</th>
-                            <th>Время</th>
+                            <th>Время отправки</th>
                             <th>Время работы скрипта</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>Да</td>
-                            <td>12:00:00</td>
-                            <td>0.0001</td>
-                        </tr>
                     </tbody>
+                    <template>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </template>
                 </table>
             </main>
         </div>
         <script src="static/js/draw-plot.js"></script>
-        <script src="static/js/form.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('form').on('submit', function(event) {
+                    event.preventDefault();
+                    console.log("Request sent");
+
+                    const template = $('template').contents().clone();
+                    const x = $('#x').val();
+                    const y = $('#y').val();
+                    const r = $('#r').val();
+
+                    template.find('td').eq(0).text(x);
+                    template.find('td').eq(1).text(y);
+                    template.find('td').eq(2).text(r);
+                    template.find('td').eq(3).text('Вычисляем...');
+                    template.find('td').eq(4).text(new Date().toLocaleString());
+                    template.find('td').eq(5).text('Вычисляем...');
+
+                    template.hide();
+                    $('.requestData tbody').append(template);
+                    template.fadeIn(500);
+                    const startTime = new Date().getTime();
+
+                    $.ajax({
+                        url: '/fcgi-bin/server.jar',
+                        type: 'POST',
+                        data: {
+                            x: x,
+                            y: y,
+                            r: r
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            const response = JSON.parse(data);
+                            const result = response.result;
+
+                            template.find('td').eq(3).text(result);
+                            const endTime = new Date().getTime();
+                            template.find('td').eq(5).text((endTime - startTime) + 'ms');
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
