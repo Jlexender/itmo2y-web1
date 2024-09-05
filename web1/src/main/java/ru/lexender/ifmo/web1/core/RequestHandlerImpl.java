@@ -22,14 +22,13 @@ public class RequestHandlerImpl implements RequestHandler {
     public void handle() {
         String content = """
                 {
-                    "result": "%s"
+                    "result": %s
                 }
                 """;
 
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
                 String requestBody = readRequestBody();
-
 
                 CoordinatesDto coordinates = ObjectMapperHolder
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
@@ -48,13 +47,15 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 System.out.println(response);
             } catch (Exception e) {
-                error(e.getMessage());
+                error("Invalid request data: " + e.getMessage());
             }
         }
     }
 
     @Override
     public void error(String message) {
+        message = message.replace("\n", " ");
+
         String content = """
                 {
                     "error": "%s"
