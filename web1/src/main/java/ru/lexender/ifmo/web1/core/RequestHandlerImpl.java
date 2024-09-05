@@ -38,8 +38,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
     @Override
     public void error(String message) {
-        while (fcgiInterface.FCGIaccept() >= 0) {
-            var response = """
+        var response = """
                     HTTP/1.1 400 Bad Request
                     Content-Type: application/json
                     Content-Length: %d
@@ -49,8 +48,7 @@ public class RequestHandlerImpl implements RequestHandler {
                     }
                     """.formatted(message.length(), message);
 
-            System.out.println(response);
-        }
+        System.out.println(response);
     }
 
     private String readRequestBody() throws IOException {
