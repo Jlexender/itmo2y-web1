@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class RequestHandlerImpl implements RequestHandler {
     ContourService contourService;
+    FCGIInterface fcgiInterface = new FCGIInterface();
 
     @Override
     public void handle() {
@@ -40,7 +41,7 @@ public class RequestHandlerImpl implements RequestHandler {
                 .isInsideContour(coordinates.x(), coordinates.y(), coordinates.r())
         );
 
-        var fcgiInterface = new FCGIInterface();
+
         while (fcgiInterface.FCGIaccept() >= 0) {
             var response = """
                     HTTP/1.1 200 OK

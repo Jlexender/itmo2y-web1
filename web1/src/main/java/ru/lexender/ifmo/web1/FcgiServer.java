@@ -10,10 +10,26 @@ import ru.lexender.ifmo.web1.core.service.ContourServiceImpl;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class FcgiServer {
-    static RequestHandler requestHandler = new RequestHandlerImpl(new ContourServiceImpl());
 
     public static void main(String[] args) {
-        requestHandler.handle();
+        String content = """
+                {
+                    "result": true
+                }
+                """;
+
+        var fcgiInterface = new FCGIInterface();
+        while (fcgiInterface.FCGIaccept() >= 0) {
+            var response = """
+                    HTTP/1.1 200 OK
+                    Content-Type: application/json
+                    Content-Length: %d
+                    
+                    %s
+                    """.formatted(content.length(), content);
+
+            System.out.println(response);
+        }
     }
 
 }
