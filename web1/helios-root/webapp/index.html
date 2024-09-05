@@ -90,21 +90,19 @@
 
                     $.ajax({
                         url: '/fcgi-bin/server.jar',
-                        type: 'POST',
+                        type: 'GET',
                         data: {
                             x: x,
                             y: y,
                             r: r
                         },
                         success: function(data) {
-                            console.log(data);
-                            const response = JSON.parse(data);
-                            const result = response.result;
-
-                            template.find('td').eq(3).text(result);
                             const endTime = new Date().getTime();
-                            template.find('td').eq(5).text((endTime - startTime) + 'ms');
-                        }
+                            const time = endTime - startTime;
+                            console.log(data);
+                            template.find('td').eq(3).text(data);
+                            template.find('td').eq(5).text(time + 'ms');
+                        },
                     });
                 });
             });
