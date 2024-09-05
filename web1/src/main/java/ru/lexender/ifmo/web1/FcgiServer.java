@@ -10,7 +10,7 @@ public class FcgiServer {
         while (fcgiInterface.FCGIaccept() >= 0) {
             var content = """
                     {
-                        "result": True
+                        "result": true
                     }
                     """;
 
