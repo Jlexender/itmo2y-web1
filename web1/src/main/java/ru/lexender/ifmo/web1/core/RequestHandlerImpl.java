@@ -22,7 +22,7 @@ public class RequestHandlerImpl implements RequestHandler {
     public void handle() {
         String content = """
                 {
-                    "result": %s
+                    "result": "%s"
                 }
                 """;
 
@@ -33,7 +33,9 @@ public class RequestHandlerImpl implements RequestHandler {
                 CoordinatesDto coordinates = ObjectMapperHolder
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
 
-                boolean result = contourService.isInsideContour(coordinates);
+                String result = contourService.isInsideContour(coordinates) ? "true" : "false";
+                result += " " + coordinates.x() + " " + coordinates.y() + " " + coordinates.r();
+
                 content = content.formatted(result);
 
                 String response = """
