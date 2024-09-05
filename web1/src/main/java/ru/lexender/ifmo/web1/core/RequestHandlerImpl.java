@@ -31,21 +31,44 @@ public class RequestHandlerImpl implements RequestHandler {
             try {
                 requestBody = readRequestBody();
             } catch (IOException | NullPointerException e) {
-                throw new RuntimeException("Can't read request body");
+                error("Can't read request body");
+                return;
             }
 
-//            CoordinatesDto coordinates = ObjectMapperHolder
-//                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
+            CoordinatesDto coordinates;
+            try {
+                coordinates = ObjectMapperHolder
+                        .getInstance().convertValue(requestBody, CoordinatesDto.class);
+            } catch (Exception e) {
+                error("Can't parse request body");
+                return;
+            }
 
-            content = String.format(content, String.valueOf(Math.random()));
+
+            content = String.format(content, contourService.isInsideContour(coordinates));
 
             var response = """
                     HTTP/2 200 OK
-                    Content-Type: application/json
+                    Content-Type: text/plain
                     Content-Length: %d
                     
                     %s
                     """.formatted(content.length(), content);
+
+            System.out.println(response);
+        }
+    }
+
+    @Override
+    public void error(String message) {
+        while (fcgiInterface.FCGIaccept() >= 0) {
+            var response = """
+                    HTTP/2 400 Bad Request
+                    Content-Type: text/plain
+                    Content-Length: %d
+                    
+                    %s
+                    """.formatted(message.length(), message);
 
             System.out.println(response);
         }

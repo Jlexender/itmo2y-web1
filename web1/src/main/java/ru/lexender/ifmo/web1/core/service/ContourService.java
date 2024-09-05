@@ -1,5 +1,7 @@
 package ru.lexender.ifmo.web1.core.service;
 
+import ru.lexender.ifmo.web1.core.dto.CoordinatesDto;
+
 public interface ContourService {
-    boolean isInsideContour(double x, double y, double radius);
+    boolean isInsideContour(CoordinatesDto coordinates);
 }

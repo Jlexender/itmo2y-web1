@@ -1,8 +1,11 @@
 package ru.lexender.ifmo.web1.core.service;
 
+import ru.lexender.ifmo.web1.core.dto.CoordinatesDto;
+
 public class ContourServiceImpl implements ContourService {
     @Override
-    public boolean isInsideContour(double x, double y, double r) {
+    public boolean isInsideContour(CoordinatesDto coordinates) {
+        double x = coordinates.x(), y = coordinates.y(), r = coordinates.r();
         if (x >= 0) {
             if (y <= 0) {
                 return x <= r / 2 && y >= -r;
