@@ -30,19 +30,17 @@ public class RequestHandlerImpl implements RequestHandler {
             String requestBody;
             try {
                 requestBody = readRequestBody();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 throw new RuntimeException("Can't read request body");
             }
 
-            CoordinatesDto coordinates = ObjectMapperHolder
-                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
+//            CoordinatesDto coordinates = ObjectMapperHolder
+//                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
 
-            content = String.format(content, contourService
-                    .isInsideContour(coordinates.x(), coordinates.y(), coordinates.r())
-            );
+            content = String.format(content, true);
 
             var response = """
-                    HTTP/1.1 200 OK
+                    HTTP/2 200 OK
                     Content-Type: application/json
                     Content-Length: %d
                     
