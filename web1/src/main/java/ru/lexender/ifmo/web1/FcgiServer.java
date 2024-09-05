@@ -18,10 +18,9 @@ public class FcgiServer {
     static FCGIInterface fcgiInterface = new FCGIInterface();
 
     public static void main(String[] args) throws IOException {
-        String content = readRequestBody();
-
-
         while (fcgiInterface.FCGIaccept() >= 0) {
+            String content = readRequestBody();
+
             var response = """
                     HTTP/1.1 200 OK
                     Content-Type: application/json
