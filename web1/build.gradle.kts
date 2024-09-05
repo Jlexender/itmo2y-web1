@@ -28,7 +28,7 @@ tasks.jar {
     }
 }
 
-tasks.register<Jar>("deploy") {
+tasks.register<Jar>("deploy.sh") {
     archiveClassifier.set("all")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
