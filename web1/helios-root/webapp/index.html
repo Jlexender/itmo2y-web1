@@ -99,8 +99,7 @@
                         success: function(data) {
                             const endTime = new Date().getTime();
                             const time = endTime - startTime;
-                            console.log(data);
-                            template.find('td').eq(3).text(data);
+                            template.find('td').eq(3).text(data.result);
                             template.find('td').eq(5).text(time + 'ms');
                         },
                     });
