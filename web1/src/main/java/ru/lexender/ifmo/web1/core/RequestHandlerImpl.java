@@ -47,7 +47,7 @@ public class RequestHandlerImpl implements RequestHandler {
                     Content-Length: %d
                     
                     %s
-                    """.formatted(requestBody.length(), requestBody);
+                    """.formatted(content.length(), content);
 
             System.out.println(response);
         }
