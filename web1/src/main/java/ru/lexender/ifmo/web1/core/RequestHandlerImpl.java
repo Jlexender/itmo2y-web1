@@ -37,7 +37,7 @@ public class RequestHandlerImpl implements RequestHandler {
 //            CoordinatesDto coordinates = ObjectMapperHolder
 //                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
 
-            content = String.format(content, true);
+            content = String.format(content, String.valueOf(Math.random()));
 
             var response = """
                     HTTP/2 200 OK
