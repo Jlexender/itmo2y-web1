@@ -31,7 +31,7 @@ public class RequestHandlerImpl implements RequestHandler {
             try {
                 requestBody = readRequestBody();
             } catch (IOException | NullPointerException e) {
-                error("Can't read request body");
+                error("Can't read request body: %s".formatted(e.getMessage()));
                 return;
             }
 
@@ -40,7 +40,7 @@ public class RequestHandlerImpl implements RequestHandler {
                 coordinates = ObjectMapperHolder
                         .getInstance().convertValue(requestBody, CoordinatesDto.class);
             } catch (Exception e) {
-                error("Can't parse request body");
+                error("Can't parse request body: %s".formatted(e.getMessage()));
                 return;
             }
 
@@ -49,7 +49,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
             var response = """
                     HTTP/2 200 OK
-                    Content-Type: text/plain
+                    Content-Type: application/json
                     Content-Length: %d
                     
                     %s
@@ -64,10 +64,12 @@ public class RequestHandlerImpl implements RequestHandler {
         while (fcgiInterface.FCGIaccept() >= 0) {
             var response = """
                     HTTP/2 400 Bad Request
-                    Content-Type: text/plain
+                    Content-Type: application/json
                     Content-Length: %d
                     
-                    %s
+                    {
+                        "error": "%s"
+                    }
                     """.formatted(message.length(), message);
 
             System.out.println(response);
