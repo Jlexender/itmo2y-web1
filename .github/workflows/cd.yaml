@@ -37,11 +37,15 @@ jobs:
           remote_key: ${{ secrets.KEY }}
           remote_port: ${{ secrets.PORT }}
 
-      - name: Run remote script
+      - name: Run remote deploy script
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: sh deploy.sh
+          script: |
+            echo "Running deploy.sh on the server."
+            cd /home/studs/${{ secrets.USERNAME }}/
+            ls -la # To check if the deploy.sh is available
+            sh deploy.sh
