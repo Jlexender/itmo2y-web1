@@ -27,35 +27,22 @@ public class RequestHandlerImpl implements RequestHandler {
                 """;
 
         while (fcgiInterface.FCGIaccept() >= 0) {
-            String requestBody;
             try {
-                requestBody = readRequestBody();
-            } catch (IOException | NullPointerException e) {
-                error("Can't read request body: %s".formatted(e.getMessage()));
-                return;
-            }
+                var requestBody = readRequestBody();
+                error("Test error. Body: " + requestBody);
 
-            CoordinatesDto coordinates;
-            try {
-                coordinates = ObjectMapperHolder
-                        .getInstance().convertValue(requestBody, CoordinatesDto.class);
+//                var response = """
+//                        HTTP/2 200 OK
+//                        Content-Type: application/json
+//                        Content-Length: %d
+//
+//                        %s
+//                        """.formatted(content.length(), content);
+//
+//                System.out.println(response);
             } catch (Exception e) {
-                error("Can't parse request body: %s".formatted(e.getMessage()));
-                return;
+                error("Invalid request data");
             }
-
-
-            content = String.format(content, contourService.isInsideContour(coordinates));
-
-            var response = """
-                    HTTP/2 200 OK
-                    Content-Type: application/json
-                    Content-Length: %d
-                    
-                    %s
-                    """.formatted(content.length(), content);
-
-            System.out.println(response);
         }
     }
 
