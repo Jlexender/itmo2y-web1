@@ -27,22 +27,26 @@ public class RequestHandlerImpl implements RequestHandler {
                 """;
 
 
-        String requestBody;
-        try {
-            requestBody = readRequestBody();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read request body");
-        }
 
-        CoordinatesDto coordinates = ObjectMapperHolder
-                .getInstance().convertValue(requestBody, CoordinatesDto.class);
 
-        content = String.format(content, contourService
-                .isInsideContour(coordinates.x(), coordinates.y(), coordinates.r())
-        );
+
 
 
         while (fcgiInterface.FCGIaccept() >= 0) {
+            String requestBody;
+            try {
+                requestBody = readRequestBody();
+            } catch (IOException e) {
+                throw new RuntimeException("Can't read request body");
+            }
+
+            CoordinatesDto coordinates = ObjectMapperHolder
+                    .getInstance().convertValue(requestBody, CoordinatesDto.class);
+
+            content = String.format(content, contourService
+                    .isInsideContour(coordinates.x(), coordinates.y(), coordinates.r())
+            );
+
             var response = """
                     HTTP/1.1 200 OK
                     Content-Type: application/json
