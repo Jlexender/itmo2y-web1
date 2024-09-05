@@ -37,6 +37,7 @@ jobs:
           remote_key: ${{ secrets.KEY }}
           remote_port: ${{ secrets.PORT }}
 
+      # Run deploy script
       - name: Run remote deploy script
         uses: appleboy/ssh-action@master
         with:
@@ -45,7 +46,60 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            echo "Running deploy.sh on the server."
+            echo "Running deploy.sh on the server..."
             cd /home/studs/${{ secrets.USERNAME }}/
-            ls -la # To check if the deploy.sh is available
             sh deploy.sh
+
+      # Add a sleep to wait for services to start
+      - name: Wait for services to start
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo "Waiting for services to start..."
+            sleep 10
+
+      # Check the status of the Java and httpd services
+      - name: Check httpd and Java server status
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo "Checking httpd status..."
+            ps aux | grep httpd
+            
+            echo "Checking Java server status..."
+            ps aux | grep java
+
+      # Check logs if any issue occurs
+      - name: Check output.log and error.log
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo "Checking output.log..."
+            cat "$HOME/output.log"
+            
+            echo "Checking error.log..."
+            cat "$HOME/error.log"
+
+      # Verify the server is up and running by making a request
+      - name: Test the deployed server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo "Testing server response..."
+            curl http://localhost:45455/fcgi-bin/server.jar
