@@ -34,11 +34,7 @@ public class RequestHandlerImpl implements RequestHandler {
                 CoordinatesDto coordinates = ObjectMapperHolder
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
 
-                String result = contourService.isInsideContour(coordinates) ? "true" : "false";
-                result += " " + coordinates.x() + " " + coordinates.y() + " " + coordinates.r();
-                result += " " + (coordinates.y() >= 0) + " " + requestBody;
-
-                content = content.formatted(result);
+                content = content.formatted(requestBody);
 
                 String response = """
                         HTTP/2 200 OK
