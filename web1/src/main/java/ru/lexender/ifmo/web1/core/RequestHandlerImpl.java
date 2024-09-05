@@ -22,14 +22,20 @@ public class RequestHandlerImpl implements RequestHandler {
     public void handle() {
         String content = """
                 {
-                    "result": %s
+                    "result": "%s"
                 }
                 """;
 
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
                 String requestBody = readRequestBody();
-                content = String.format(content, requestBody);
+
+
+                CoordinatesDto coordinates = ObjectMapperHolder
+                        .getInstance().readValue(requestBody, CoordinatesDto.class);
+
+                boolean result = contourService.isInsideContour(coordinates);
+                content = content.formatted(result);
 
                 String response = """
                         HTTP/2 200 OK
