@@ -55,16 +55,21 @@ public class RequestHandlerImpl implements RequestHandler {
 
     @Override
     public void error(String message) {
+        String content = """
+                {
+                    "error": "%s"
+                }
+                """.formatted(message);
+
+
         var response = """
                     HTTP/2 400 Bad Request
                     Content-Type: application/json
                     Content-Length: %d
                     
-                    {
-                        "error": "%s"
-                    }
+                    %s
                     
-                    """.formatted(message.getBytes(StandardCharsets.UTF_8).length, message);
+                    """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
         System.out.println(response);
     }
