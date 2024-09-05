@@ -26,6 +26,7 @@ public class RequestHandlerImpl implements RequestHandler {
                 }
                 """;
 
+
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
                 String requestBody = readRequestBody();
@@ -35,7 +36,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 String result = contourService.isInsideContour(coordinates) ? "true" : "false";
                 result += " " + coordinates.x() + " " + coordinates.y() + " " + coordinates.r();
-                result += " " + (coordinates.y() >= 0);
+                result += " " + (coordinates.y() >= 0) + " " + requestBody;
 
                 content = content.formatted(result);
 
