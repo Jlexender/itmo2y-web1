@@ -75,6 +75,8 @@
                     const y = parseFloat($('#y').val());
                     const r = parseFloat($('#r').val());
 
+                    drawCalculatedTicks(r);
+
                     template.find('td').eq(0).text(x);
                     template.find('td').eq(1).text(y);
                     template.find('td').eq(2).text(r);
@@ -99,7 +101,6 @@
                         success: function(data) {
                             const endTime = new Date().getTime();
                             const time = endTime - startTime;
-                            alert(data.result);
 
                             template.find('td').eq(3).text(data.result);
                             template.find('td').eq(5).text(time + 'ms');

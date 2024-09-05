@@ -8,7 +8,21 @@ ctx.scale(1, -1);
 
 const radius = 175;
 
-const drawAxes = () => {
+function drawTicks(x, y, x1, y1, label) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x1, y1);
+    ctx.stroke();
+
+    ctx.save();
+    ctx.scale(1, -1);
+    ctx.font = '16px sans-serif';
+    ctx.fillStyle = 'gray';
+    ctx.fillText(label, x1, -y1 + 20);
+    ctx.restore();
+}
+
+const drawAxes = (rVal) => {
     ctx.beginPath();
     ctx.moveTo(-canvas.width / 2, 0);
     ctx.lineTo(canvas.width / 2, 0);
@@ -27,18 +41,9 @@ const drawAxes = () => {
     ctx.lineTo(-5, canvas.height / 2 - 10);
     ctx.stroke();
 
-    function drawTicks(x, y, x1, y1, label) {
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x1, y1);
-        ctx.stroke();
-
-        ctx.save();
-        ctx.scale(1, -1);
-        ctx.font = '16px sans-serif';
-        ctx.fillStyle = 'gray';
-        ctx.fillText(label, x1, -y1 + 20);
-        ctx.restore();
+    if (rVal !== undefined) {
+        drawCalculatedTicks(rVal);
+        return;
     }
 
     drawTicks(center.x + radius, center.y, center.x + radius, center.y - 10, 'R');
@@ -50,6 +55,18 @@ const drawAxes = () => {
     drawTicks(center.x - radius / 2, center.y, center.x - radius / 2, center.y - 10, '-R/2');
     drawTicks(center.x, center.y + radius / 2, center.x + 10, center.y + radius / 2, 'R/2');
     drawTicks(center.x, center.y - radius / 2, center.x + 10, center.y - radius / 2, '-R/2');
+}
+
+function drawCalculatedTicks(rVal) {
+    drawTicks(center.x + radius, center.y, center.x + radius, center.y - 10, rVal);
+    drawTicks(center.x - radius, center.y, center.x - radius, center.y - 10, -rVal);
+    drawTicks(center.x, center.y + radius, center.x + 10, center.y + radius, rVal);
+    drawTicks(center.x, center.y - radius, center.x + 10, center.y - radius, -rVal);
+
+    drawTicks(center.x + radius / 2, center.y, center.x + radius / 2, center.y - 10, rVal/2);
+    drawTicks(center.x - radius / 2, center.y, center.x - radius / 2, center.y - 10, -rVal/2);
+    drawTicks(center.x, center.y + radius / 2, center.x + 10, center.y + radius / 2, rVal/2);
+    drawTicks(center.x, center.y - radius / 2, center.x + 10, center.y - radius / 2, -rVal/2);
 }
 
 const drawBroken = (data) => {
