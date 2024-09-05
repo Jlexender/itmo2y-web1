@@ -1,111 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Index of Web1</title>
-        <link rel="stylesheet" href="static/css/style.css">
-        <link rel="stylesheet" href="static/css/normalize.css">
-        <script src="static/js/jquery-3.7.1.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <h1>Веб 1</h1>
-                <div class="credentials">
-                    <ul>
-                        <li>Калиев Александр Дмитриевич</li>
-                        <li>P3211</li>
-                        <li>21107</li>
-                    </ul>
-                </div>
-            </header>
-            <main>
-                <div class="plotData">
-                    <form autocomplete="off">
-                        <label for="x">X:
-                        <input type="number" id="x" name="x" min="-3" max="5" step="1">
-                        </label>
-                        <label for="y">Y:
-                        <input type="text" id="y" name="y">
-                        </label>
-                        <label for="r">R:
-                        <input type="number" id="r" name="r" min="1" max="3" step="0.5">
-                        </label>
-                        <button id="submit">Отправить!</button>
-                    </form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('form').on('submit', function(event) {
+            event.preventDefault();
 
-                    <canvas id="canvas" width="500" height="500">
-                    </canvas>
-                </div>
-                <table class="requestData">
-                    <thead>
-                        <tr>
-                            <th>X</th>
-                            <th>Y</th>
-                            <th>R</th>
-                            <th>Результат</th>
-                            <th>Время отправки</th>
-                            <th>Время работы скрипта</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <template>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </template>
-                </table>
-            </main>
-        </div>
-        <script src="static/js/draw-plot.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('form').on('submit', function(event) {
-                    event.preventDefault();
+            const template = $('template').contents().clone();
+            const x = parseFloat($('#x').val());
+            const y = parseFloat($('#y').val());
+            const r = parseFloat($('#r').val());
 
-                    const template = $('template').contents().clone();
-                    const x = parseFloat($('#x').val());
-                    const y = parseFloat($('#y').val());
-                    const r = parseFloat($('#r').val());
+            template.find('td').eq(0).text(x);
+            template.find('td').eq(1).text(y);
+            template.find('td').eq(2).text(r);
+            template.find('td').eq(3).text('Вычисляем...');
+            template.find('td').eq(4).text(new Date().toLocaleString());
+            template.find('td').eq(5).text('Вычисляем...');
 
-                    template.find('td').eq(0).text(x);
-                    template.find('td').eq(1).text(y);
-                    template.find('td').eq(2).text(r);
-                    template.find('td').eq(3).text('Вычисляем...');
-                    template.find('td').eq(4).text(new Date().toLocaleString());
-                    template.find('td').eq(5).text('Вычисляем...');
+            template.hide();
+            $('.requestData tbody').append(template);
+            template.fadeIn(500);
+            const startTime = new Date().getTime();
 
-                    template.hide();
-                    $('.requestData tbody').append(template);
-                    template.fadeIn(500);
-                    const startTime = new Date().getTime();
+            $.ajax({
+                url: '/fcgi-bin/server.jar',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    x: x,
+                    y: y,
+                    r: r
+                }),
+                success: function(data) {
+                    const endTime = new Date().getTime();
+                    const time = endTime - startTime;
+                    alert(data.result);
 
-                    $.ajax({
-                        url: '/fcgi-bin/server.jar',
-                        type: 'POST',
-                        data: {
-                            x: x,
-                            y: y,
-                            r: r
-                        },
-                        success: function(data) {
-                            const endTime = new Date().getTime();
-                            const time = endTime - startTime;
-                            alert(data.result);
-
-                            template.find('td').eq(3).text(data.result);
-                            template.find('td').eq(5).text(time + 'ms');
-                        },
-                    });
-                });
+                    template.find('td').eq(3).text(data.result);
+                    template.find('td').eq(5).text(time + 'ms');
+                },
             });
-        </script>
-    </body>
-</html>
+        });
+    });
+</script>
