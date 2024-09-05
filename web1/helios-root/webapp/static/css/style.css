@@ -182,8 +182,11 @@ table tbody tr:nth-child(even) {
     background: var(--superdark);
 }
 
+table tbody tr {
+    transition: background 0.3s ease-in-out;
+}
+
 table tbody tr:hover {
     background: var(--dark);
-    transition: background 0.3s ease-in-out;
 }
 
