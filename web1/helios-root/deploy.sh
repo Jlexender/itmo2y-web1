@@ -1,3 +1,4 @@
+killall java
 killall httpd
 
 export JAVA_VERSION=21
