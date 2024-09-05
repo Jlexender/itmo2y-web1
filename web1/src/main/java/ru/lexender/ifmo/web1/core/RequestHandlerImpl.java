@@ -51,7 +51,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
             var response = """
                     HTTP/1.1 200 OK
-                    Content-Type: text/plain
+                    Content-Type: application/json
                     Content-Length: %d
                     
                     %s
