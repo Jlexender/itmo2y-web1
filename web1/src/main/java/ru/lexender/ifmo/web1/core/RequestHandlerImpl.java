@@ -34,6 +34,8 @@ public class RequestHandlerImpl implements RequestHandler {
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
 
                 String result = contourService.isInsideContour(coordinates) ? "true" : "false";
+                result += " " + coordinates.x() + " " + coordinates.y() + " " + coordinates.r();
+                result += " " + (coordinates.y() >= 0);
 
                 content = content.formatted(result);
 
