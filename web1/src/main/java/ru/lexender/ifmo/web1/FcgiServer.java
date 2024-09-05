@@ -19,14 +19,7 @@ public class FcgiServer {
 
     public static void main(String[] args) {
         RequestHandler requestHandler = new RequestHandlerImpl(new ContourServiceImpl());
-        while (fcgiInterface.FCGIaccept() >= 0) {
-            try {
-                requestHandler.handle();
-            } catch (Exception e) {
-
-            }
-
-        }
+        requestHandler.handle();
     }
 
 }

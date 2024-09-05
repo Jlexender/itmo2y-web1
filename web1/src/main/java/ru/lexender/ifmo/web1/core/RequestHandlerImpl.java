@@ -30,16 +30,6 @@ public class RequestHandlerImpl implements RequestHandler {
             try {
                 var requestBody = readRequestBody();
                 error("Test error. Body: " + requestBody);
-
-//                var response = """
-//                        HTTP/2 200 OK
-//                        Content-Type: application/json
-//                        Content-Length: %d
-//
-//                        %s
-//                        """.formatted(content.length(), content);
-//
-//                System.out.println(response);
             } catch (Exception e) {
                 error("Invalid request data");
             }
@@ -50,7 +40,7 @@ public class RequestHandlerImpl implements RequestHandler {
     public void error(String message) {
         while (fcgiInterface.FCGIaccept() >= 0) {
             var response = """
-                    HTTP/2 400 Bad Request
+                    HTTP/1.1 400 Bad Request
                     Content-Type: application/json
                     Content-Length: %d
                     
