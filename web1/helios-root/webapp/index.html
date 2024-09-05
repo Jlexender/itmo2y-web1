@@ -67,15 +67,18 @@
         <script src="static/js/draw-plot.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
+                drawPlot();
+
                 $('form').on('submit', function(event) {
                     event.preventDefault();
 
                     const template = $('template').contents().clone();
+
                     const x = parseFloat($('#x').val());
                     const y = parseFloat($('#y').val());
                     const r = parseFloat($('#r').val());
 
-                    drawCalculatedTicks(r);
+                    refreshLabels(r);
 
                     template.find('td').eq(0).text(x);
                     template.find('td').eq(1).text(y);
