@@ -85,6 +85,10 @@
             $(document).ready(function() {
                 drawPlot();
 
+                $('#r').on('change', function() {
+                    refreshLabels(this.value);
+                });
+
                 $('form').on('submit', function(event) {
                     event.preventDefault();
 
@@ -93,8 +97,6 @@
                     const x = parseFloat($('#x').val());
                     const y = parseFloat($('#y').val());
                     const r = parseFloat($('#r').val());
-
-                    refreshLabels(r);
 
                     template.find('td').eq(0).text(x);
                     template.find('td').eq(1).text(y);
