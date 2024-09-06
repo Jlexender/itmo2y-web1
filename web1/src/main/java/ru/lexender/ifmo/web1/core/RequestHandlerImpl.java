@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import ru.lexender.ifmo.web1.core.dto.CoordinatesDto;
 import ru.lexender.ifmo.web1.core.service.ContourService;
+import ru.lexender.ifmo.web1.core.validation.ValidationService;
+import ru.lexender.ifmo.web1.fcgi.FcgiInterfaceHolder;
 import ru.lexender.ifmo.web1.json.ObjectMapperHolder;
 
 import java.io.IOException;
@@ -16,10 +18,12 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class RequestHandlerImpl implements RequestHandler {
     ContourService contourService;
-    FCGIInterface fcgiInterface = new FCGIInterface();
+    ValidationService validationService;
 
     @Override
     public void handle() {
+        var fcgiInterface = FcgiInterfaceHolder.getInstance();
+
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
                 String content = """
@@ -32,6 +36,11 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 CoordinatesDto coordinates = ObjectMapperHolder
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
+
+                if (!validationService.validate(coordinates)) {
+                    error("Request data is invalid");
+                    continue;
+                }
 
                 String result = contourService.isInsideContour(coordinates) ? "true" : "false";
                 content = content.formatted(result);
@@ -47,7 +56,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 System.out.println(response);
             } catch (Exception e) {
-                error("Invalid request data");
+                error("Can't process request");
             }
         }
     }
