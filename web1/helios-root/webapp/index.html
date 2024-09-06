@@ -25,6 +25,7 @@
                     <form autocomplete="off">
                         <label for="x">X:
                             <select id="x" name="x" required>
+                                <option value="" disabled selected>Select X</option>
                                 <option value="-3">-3</option>
                                 <option value="-2">-2</option>
                                 <option value="-1">-1</option>
@@ -37,10 +38,11 @@
                             </select>
                         </label>
                         <label for="y">Y:
-                        <input type="number" id="y" name="y" min="-3" max="5" placeholder="-3 &le; y &le; 5" required>
+                            <input type="number" id="y" name="y" min="-3" max="5" step="0.001" placeholder="&#8722;3 &le; y &le; 5" required>
                         </label>
                         <label for="r">R:
                             <select id="r" name="r" required>
+                                <option value="" disabled selected>Select R</option>
                                 <option value="1">1</option>
                                 <option value="1.5">1.5</option>
                                 <option value="2">2</option>
