@@ -20,21 +20,21 @@ public class RequestHandlerImpl implements RequestHandler {
 
     @Override
     public void handle() {
-        String content = """
+        while (fcgiInterface.FCGIaccept() >= 0) {
+            try {
+                String content = """
                 {
                     "result": "%s"
                 }
                 """;
 
-
-        while (fcgiInterface.FCGIaccept() >= 0) {
-            try {
                 String requestBody = readRequestBody();
 
                 CoordinatesDto coordinates = ObjectMapperHolder
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
 
-                content = content.formatted(requestBody);
+                String result = contourService.isInsideContour(coordinates) ? "true" : "false";
+                content = content.formatted(result);
 
                 String response = """
                         HTTP/2 200 OK
