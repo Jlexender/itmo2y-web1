@@ -92,7 +92,7 @@ form label {
     color: var(--superlight);
 }
 
-form input {
+form input, form select {
     font-size: 20px;
     width: 80%;
     border-radius: 7px;
@@ -104,7 +104,7 @@ form input {
     transition: box-shadow ease 0.3s;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none;
     box-shadow: 0 0 5px var(--light-blue);
 }
