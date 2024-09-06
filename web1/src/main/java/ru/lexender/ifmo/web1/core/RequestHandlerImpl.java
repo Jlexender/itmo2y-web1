@@ -63,15 +63,13 @@ public class RequestHandlerImpl implements RequestHandler {
         message = message.replace("\n", " ");
 
         String content = """
-                {
-                    "error": "%s"
-                }
+                <td>%s</td>
                 """.formatted(message);
 
 
         var response = """
                     HTTP/2 400 Bad Request
-                    Content-Type: application/json
+                    Content-Type: text/html
                     Content-Length: %d
                     
                     %s

@@ -130,8 +130,8 @@
                             template.find('td').eq(5).text(time + 'ms');
                         },
                         error: function() {
-                            template.find('td').eq(3).text('Ошибка');
-                            template.find('td').eq(5).text('Ошибка');
+                            template.find('td').eq(3).text('Ошибка').color('red');
+                            template.find('td').eq(5).text('Ошибка').color('red');
                         }
                     });
                 });
