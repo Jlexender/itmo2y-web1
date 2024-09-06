@@ -26,11 +26,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
-                String content = """
-                {
-                    "result": "%s"
-                }
-                """;
+                String content = "<td>%s</td>";
 
                 String requestBody = readRequestBody();
 
@@ -46,13 +42,13 @@ public class RequestHandlerImpl implements RequestHandler {
                 content = content.formatted(result);
 
                 String response = """
-                        HTTP/2 200 OK
-                        Content-Type: application/json
-                        Content-Length: %d
-                        
-                        %s
-                        
-                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+                    HTTP/2 200 OK
+                    Content-Type: text/html
+                    Content-Length: %d
+                    
+                    %s
+                    
+                    """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
                 System.out.println(response);
             } catch (Exception e) {
@@ -60,6 +56,7 @@ public class RequestHandlerImpl implements RequestHandler {
             }
         }
     }
+
 
     @Override
     public void error(String message) {
