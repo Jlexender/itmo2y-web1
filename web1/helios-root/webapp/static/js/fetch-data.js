@@ -3,6 +3,8 @@ $(document).ready(function() {
 
     $('#r').on('change', function() {
         refreshLabels(this.value);
+        refreshPoints(this.value);
+        drawPlot();
     });
 
     $('form').on('submit', function(event) {
@@ -38,14 +40,14 @@ $(document).ready(function() {
                 const endTime = new Date().getTime();
                 const time = endTime - startTime;
 
-                drawPoint(x, y, r, data.result);
+                insertPoint(x, y, r, data.result);
 
                 template.find('td').eq(3).replaceWith(data);
                 template.find('td').eq(5).text(time + 'ms');
             },
             error: function() {
-                template.find('td').eq(3).text('Ошибка').color('red');
-                template.find('td').eq(5).text('Ошибка').color('red');
+                template.find('td').eq(3).text('Ошибка').css('color', 'red');
+                template.find('td').eq(5).text('Ошибка').css('color', 'red');
             }
         });
     });

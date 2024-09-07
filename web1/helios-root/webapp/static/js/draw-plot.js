@@ -94,25 +94,23 @@ function refreshLabels(R) {
     labels[3].text = -R/2;
     labels[4].text = -R;
     labels[6].text = R/2;
-
-    drawPlot();
 }
 
-function drawPoints() {
+function refreshPoints(newR) {
     for (let i = 0; i < points.length; i++) {
-        drawPoint(points[i].x, points[i].y, $('#r').val());
+        points[i].x = canvas.width / 2 + points[i].realX * radius / newR;
+        points[i].y = canvas.height / 2 - points[i].realY * radius / newR;
     }
 }
 
 points = [];
+function drawPoints() {
+    points.forEach((point) => {
+        drawPoint(point);
+    });
+}
 
-function drawPoint(x, y, r) {
-    const point = {
-        x: canvas.width / 2 + x * radius / r,
-        y: canvas.height / 2 - y * radius / r
-    };
-
-    points.push(point);
+function drawPoint(point) {
     let old = ctx.fillStyle;
     ctx.fillStyle = 'white';
     ctx.beginPath();
@@ -120,4 +118,18 @@ function drawPoint(x, y, r) {
     ctx.fill();
     ctx.fillStyle = old;
 }
+
+function insertPoint(x, y, r) {
+    const point = {
+        x: canvas.width / 2 + x * radius / r,
+        y: canvas.height / 2 - y * radius / r,
+        realX: x,
+        realY: y,
+    };
+
+    points.push(point);
+    drawPoint(point);
+}
+
+
 
