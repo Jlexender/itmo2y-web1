@@ -63,6 +63,7 @@ function drawPlot() {
     ctx.fill();
 
     drawLabels();
+    drawPoints();
 }
 
 labels = [
@@ -97,10 +98,26 @@ function refreshLabels(R) {
     drawPlot();
 }
 
-function drawPoint(x, y, r, result) {
+function drawPoints() {
+    for (let i = 0; i < points.length; i++) {
+        drawPoint(points[i].x, points[i].y, $('#r').val());
+    }
+}
+
+points = [];
+
+function drawPoint(x, y, r) {
+    const point = {
+        x: canvas.width / 2 + x * radius / r,
+        y: canvas.height / 2 - y * radius / r
+    };
+
+    points.push(point);
+    let old = ctx.fillStyle;
+    ctx.fillStyle = 'white';
     ctx.beginPath();
-    ctx.arc(canvas.width / 2 + x * radius / r, canvas.height / 2 - y * radius / r, 2, 0, 2 * Math.PI);
-    ctx.fillStyle = result ? 'green' : 'red';
+    ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
     ctx.fill();
+    ctx.fillStyle = old;
 }
 
