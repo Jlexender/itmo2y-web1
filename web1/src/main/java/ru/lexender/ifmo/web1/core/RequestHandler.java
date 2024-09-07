@@ -3,8 +3,8 @@ package ru.lexender.ifmo.web1.core;
 /**
  * Interface for handling requests.
  *
- * @see RequestHandlerImpl
  * @author Jlexender
+ * @see RequestHandlerImpl
  * @since 1.0
  */
 public interface RequestHandler {
@@ -20,6 +20,7 @@ public interface RequestHandler {
     /**
      * Wrapper for sending error messages.
      * Hardcoded for 400 Bad Request.
+     *
      * @param message error message
      */
     void error(String message);

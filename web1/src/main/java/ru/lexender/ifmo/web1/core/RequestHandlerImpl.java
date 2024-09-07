@@ -18,10 +18,10 @@ import java.nio.charset.StandardCharsets;
  * Implementation of the {@link RequestHandler} interface.
  * Handles requests from the FastCGI interface.
  *
+ * @author Jlexender
  * @see RequestHandler
  * @see FCGIInterface
  * @see FcgiInterfaceHolder
- * @author Jlexender
  * @since 1.0
  */
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -52,13 +52,13 @@ public class RequestHandlerImpl implements RequestHandler {
                 content = content.formatted(result);
 
                 String response = """
-                    HTTP/2 200 OK
-                    Content-Type: text/html
-                    Content-Length: %d
-                    
-                    %s
-                    
-                    """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                                            
+                        %s
+                                            
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
                 System.out.println(response);
             } catch (Exception e) {
@@ -78,13 +78,13 @@ public class RequestHandlerImpl implements RequestHandler {
 
 
         var response = """
-                    HTTP/2 400 Bad Request
-                    Content-Type: text/html
-                    Content-Length: %d
-                    
-                    %s
-                    
-                    """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+                HTTP/2 400 Bad Request
+                Content-Type: text/html
+                Content-Length: %d
+                                    
+                %s
+                                    
+                """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
         System.out.println(response);
     }

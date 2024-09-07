@@ -6,8 +6,8 @@ import com.fastcgi.FCGIInterface;
  * This class is a holder for the FastCGI interface instance.
  * Used to prevent multiple instances of the FastCGI interface.
  *
- * @see FCGIInterface
  * @author Jlexender
+ * @see FCGIInterface
  * @since 1.0
  */
 public class FcgiInterfaceHolder {

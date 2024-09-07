@@ -5,9 +5,9 @@ import ru.lexender.ifmo.web1.core.dto.CoordinatesDto;
 /**
  * Interface for validating coordinates. Used to check if the coordinates are valid.
  *
+ * @author Jlexender
  * @see ValidationServiceImpl
  * @see CoordinatesDto
- * @author Jlexender
  * @since 1.0
  */
 public interface ValidationService {
