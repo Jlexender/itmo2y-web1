@@ -97,3 +97,10 @@ function refreshLabels(R) {
     drawPlot();
 }
 
+function drawPoint(x, y, r, result) {
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2 + x * radius / r, canvas.height / 2 - y * radius / r, 2, 0, 2 * Math.PI);
+    ctx.fillStyle = result ? 'green' : 'red';
+    ctx.fill();
+}
+
