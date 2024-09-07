@@ -15,6 +15,19 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Main class of the application. It starts the FastCGI server and handles requests.
+ *
+ * @see FCGIInterface
+ * @see FcgiInterfaceHolder
+ * @see RequestHandler
+ * @see RequestHandlerImpl
+ * @see ContourServiceImpl
+ * @see ValidationServiceImpl
+ * @author Jlexender
+ * @since 1.0
+ */
+
 public class FcgiServer {
 
     public static void main(String[] args) {

@@ -14,6 +14,16 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Implementation of the {@link RequestHandler} interface.
+ * Handles requests from the FastCGI interface.
+ *
+ * @see RequestHandler
+ * @see FCGIInterface
+ * @see FcgiInterfaceHolder
+ * @author Jlexender
+ * @since 1.0
+ */
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class RequestHandlerImpl implements RequestHandler {

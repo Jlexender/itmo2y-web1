@@ -2,6 +2,14 @@ package ru.lexender.ifmo.web1.core.service;
 
 import ru.lexender.ifmo.web1.core.dto.CoordinatesDto;
 
+/**
+ * Implementation of the ContourService interface.
+ * Used to check if the point is inside the contour.
+ *
+ * @see ContourService
+ * @see CoordinatesDto
+ * @since 1.0
+ */
 public class ContourServiceImpl implements ContourService {
     @Override
     public boolean isInsideContour(CoordinatesDto coordinates) {
