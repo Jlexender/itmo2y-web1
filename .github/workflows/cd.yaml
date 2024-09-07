@@ -21,9 +21,6 @@ jobs:
         run: ./gradlew deploy
         working-directory: ./web1
 
-      - name: Good to see you here...
-        run: 'echo "Author: Jlexender" >> ./web1/helios-root/deploy.sh'
-
       - name: Rsync to the server
         uses: burnett01/rsync-deployments@7.0.1
         with:
