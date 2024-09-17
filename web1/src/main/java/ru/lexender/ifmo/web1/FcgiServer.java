@@ -7,6 +7,7 @@ import ru.lexender.ifmo.web1.core.service.ContourServiceImpl;
 import ru.lexender.ifmo.web1.core.validation.ValidationServiceImpl;
 import ru.lexender.ifmo.web1.fcgi.FcgiInterfaceHolder;
 
+
 /**
  * Main class of the application. It starts the FastCGI server and handles requests.
  *
@@ -23,8 +24,6 @@ import ru.lexender.ifmo.web1.fcgi.FcgiInterfaceHolder;
 public class FcgiServer {
 
     public static void main(String[] args) {
-        RequestHandler requestHandler = new RequestHandlerImpl(new ContourServiceImpl(), new ValidationServiceImpl());
-        requestHandler.handle();
+        new RequestHandlerImpl(new ContourServiceImpl(), new ValidationServiceImpl()).handle();
     }
-
 }
