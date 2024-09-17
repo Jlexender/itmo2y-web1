@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import ru.lexender.ifmo.web1.core.dto.CoordinatesDto;
 import ru.lexender.ifmo.web1.core.service.ContourService;
+import ru.lexender.ifmo.web1.core.validation.ValidationConfiguration;
 import ru.lexender.ifmo.web1.core.validation.ValidationService;
 import ru.lexender.ifmo.web1.fcgi.FcgiInterfaceHolder;
 import ru.lexender.ifmo.web1.json.ObjectMapperHolder;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Properties;
+import java.util.StringTokenizer;
 
 /**
  * Implementation of the {@link RequestHandler} interface.
@@ -36,6 +39,45 @@ public class RequestHandlerImpl implements RequestHandler {
         var fcgiInterface = FcgiInterfaceHolder.getInstance();
 
         while (fcgiInterface.FCGIaccept() >= 0) {
+            Properties params = readRequestParams();
+            if (params.contains("xSelect")) {
+                StringBuilder sb = new StringBuilder();
+                for (var x: ValidationConfiguration.validX) {
+                    String t = "<option value=\"%f\">%f</option>".formatted(x, x);
+                    sb.append(t).append('\n');
+                }
+
+                String content = sb.toString();
+
+                String response = """
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+            }
+
+            if (params.contains("zSelect")) {
+                StringBuilder sb = new StringBuilder();
+                for (var z: ValidationConfiguration.validR) {
+                    String t = "<option value=\"%f\">%f</option>-->".formatted(z, z);
+                    sb.append(t).append('\n');
+                }
+
+                String content = sb.toString();
+
+                String response = """
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+            }
+
             try {
                 var start = System.nanoTime();
 
@@ -108,5 +150,20 @@ public class RequestHandlerImpl implements RequestHandler {
         buffer.clear();
 
         return new String(requestBodyRaw, StandardCharsets.UTF_8);
+    }
+
+    private Properties readRequestParams() {
+        final String paramsString = FCGIInterface.request.params.getProperty("REQUEST_URI", "?").split("\\?")[1];
+        return paramsString.isBlank() ? new Properties() : parseParams(paramsString);
+    }
+
+    private Properties parseParams(String paramsString) {
+        StringTokenizer tokenizer = new StringTokenizer(paramsString, "&");
+        Properties params = new Properties();
+        while (tokenizer.hasMoreTokens()) {
+            String[] pair = tokenizer.nextToken().split("=");
+            params.setProperty(pair[0], pair[1]);
+        }
+        return params;
     }
 }
