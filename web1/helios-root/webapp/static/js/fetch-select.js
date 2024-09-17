@@ -9,9 +9,10 @@ $(document).ready(function() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/fcgi-bin/server.jar?rParams=1',
+        url: '/fcgi-bin/server.jar?rParams=1',
         type: 'GET',
         success: function(response) {
+            console.log(response)
             populateSelectWithHTML($r, response);
         },
         error: function(xhr, status, error) {
@@ -20,7 +21,7 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: 'http://localhost:8080/fcgi-bin/server.jar?xParams=1',
+        url: '/fcgi-bin/server.jar?xParams=1',
         type: 'GET',
         success: function(response) {
             populateSelectWithHTML($x, response);
