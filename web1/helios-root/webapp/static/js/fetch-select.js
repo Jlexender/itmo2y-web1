@@ -9,11 +9,8 @@ $(document).ready(function() {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/fcgi-bin/server.jar',
+        url: 'http://localhost:8080/fcgi-bin/server.jar?rParams=1',
         type: 'GET',
-        data: {
-            rParams: true
-        },
         success: function(response) {
             populateSelectWithHTML($r, response);
         },
@@ -23,11 +20,8 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: 'http://localhost:8080/fcgi-bin/server.jar',
+        url: 'http://localhost:8080/fcgi-bin/server.jar?xParams=1',
         type: 'GET',
-        data: {
-            xParams: true
-        },
         success: function(response) {
             populateSelectWithHTML($x, response);
         },
