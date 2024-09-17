@@ -41,10 +41,33 @@ public class RequestHandlerImpl implements RequestHandler {
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
                 Properties requestParams = readRequestParams();
-                if (requestParams.contains("xSelector")) {
-                    String content = """
-                        <option value="1">1</option>
-                        """;
+                if (requestParams.containsKey("xSelector")) {
+                    StringBuilder sb = new StringBuilder();
+                    for (var x: ValidationConfiguration.validX) {
+                        sb.append("<option value=\"%f\">%f</option>".formatted(x, x));
+                    }
+
+                    String content = sb.toString();
+
+                    String response = """
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                    System.out.println(response);
+                    continue;
+                }
+
+                if (requestParams.containsKey("rSelector")) {
+                    StringBuilder sb = new StringBuilder();
+                    for (var z: ValidationConfiguration.validR) {
+                        sb.append("<option value=\"%f\">%f</option>".formatted(z, z));
+                    }
+                    String content = sb.toString();
 
                     String response = """
                         HTTP/2 200 OK
