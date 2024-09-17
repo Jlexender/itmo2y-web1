@@ -1,0 +1,26 @@
+name: Lint and run tests
+
+on:
+  [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: Lint with Checkstyle
+        run: ./gradlew checkstyleMain checkstyleTest
+        working-directory: ./web1
+
+      - name: Run tests
+        run: ./gradlew test
+        working-directory: ./web1
