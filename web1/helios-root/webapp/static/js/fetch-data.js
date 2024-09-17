@@ -40,17 +40,16 @@ $(document).ready(function() {
             success: function(data) {
                 const time = new Date().getTime() - startTime;
 
-                const result = $(data).find('td');
-                alert(result)
+                const result = $(data).filter('td');
 
-                const boolean = $(result).eq(0);
-                const sTime = $(result).eq(1);
+                const boolean = $(result).eq(0).text();
+                const sTime = $(result).eq(1).text();
 
                 insertPoint(x, y, r, boolean);
 
-                template.find('td').eq(3).replaceWith(boolean);
+                template.find('td').eq(3).text(boolean);
                 template.find('td').eq(5).text(time + 'ms');
-                template.find('td').eq(6).text(sTime + 'ns')
+                template.find('td').eq(6).text(sTime + 'ns');
             },
             error: function() {
                 template.find('td').eq(3).text('Ошибка').css('color', 'red');
