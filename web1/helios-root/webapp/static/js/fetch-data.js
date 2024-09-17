@@ -47,7 +47,7 @@ $(document).ready(function() {
 
                 insertPoint(x, y, r, data.result);
 
-                template.find('td').eq(3).replaceWith(data);
+                template.find('td').eq(3).replaceWith(boolean);
                 template.find('td').eq(5).text(time + 'ms');
                 template.find('td').eq(6).text(sTime + 'ns')
             },
