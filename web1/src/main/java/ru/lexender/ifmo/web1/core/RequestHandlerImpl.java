@@ -157,8 +157,13 @@ public class RequestHandlerImpl implements RequestHandler {
     }
 
     private Properties readRequestParams() {
-        final String paramsString = FCGIInterface.request.params.getProperty("REQUEST_URI", "?").split("\\?")[1];
-        return (paramsString == null || paramsString.isBlank()) ? new Properties() : parseParams(paramsString);
+        try {
+            final String paramsString = FCGIInterface.request.params.getProperty("REQUEST_URI", "?").split("\\?")[1];
+            return (paramsString == null || paramsString.isBlank()) ? new Properties() : parseParams(paramsString);
+        } catch (Exception e) {
+            return new Properties();
+        }
+
     }
 
     private Properties parseParams(String paramsString) {
