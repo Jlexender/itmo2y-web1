@@ -60,10 +60,7 @@ public class RequestHandlerImpl implements RequestHandler {
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
                     System.out.println(response);
-                    continue;
-                }
-
-                if (params.contains("zSelect")) {
+                } else if (params.contains("zSelect")) {
                     StringBuilder sb = new StringBuilder();
                     for (var z: ValidationConfiguration.validR) {
                         String t = "<option value=\"%f\">%f</option>-->".formatted(z, z);
@@ -82,31 +79,28 @@ public class RequestHandlerImpl implements RequestHandler {
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
                     System.out.println(response);
-                    continue;
-                }
-
-                var start = System.nanoTime();
-
-                String content = """
+                } else {
+                    var start = System.nanoTime();
+                    String content = """
                         <td>%s</td>
                         <td>%d</td>
                         """;
 
-                String requestBody = readRequestBody();
+                    String requestBody = readRequestBody();
 
-                CoordinatesDto coordinates = ObjectMapperHolder
-                        .getInstance().readValue(requestBody, CoordinatesDto.class);
+                    CoordinatesDto coordinates = ObjectMapperHolder
+                            .getInstance().readValue(requestBody, CoordinatesDto.class);
 
-                if (!validationService.validate(coordinates)) {
-                    error("Request data is invalid");
-                    continue;
-                }
+                    if (!validationService.validate(coordinates)) {
+                        error("Request data is invalid");
+                        continue;
+                    }
 
-                String result = contourService.isInsideContour(coordinates) ? "true" : "false";
-                var allTime = System.nanoTime() - start;
-                content = content.formatted(result, allTime);
+                    String result = contourService.isInsideContour(coordinates) ? "true" : "false";
+                    var allTime = System.nanoTime() - start;
+                    content = content.formatted(result, allTime);
 
-                String response = """
+                    String response = """
                         HTTP/2 200 OK
                         Content-Type: text/html
                         Content-Length: %d
@@ -115,7 +109,9 @@ public class RequestHandlerImpl implements RequestHandler {
                         
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
-                System.out.println(response);
+                    System.out.println(response);
+                }
+
             } catch (Exception e) {
                 error("Can't process request: " + e.getMessage());
             }
