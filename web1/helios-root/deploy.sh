@@ -9,11 +9,14 @@ export JAVA_VERSION=21
 
 echo "Stopping any running httpd processes" | tee -a $LOG_FILE
 killall httpd 2>> $LOG_FILE
+sleep 1
+
+echo "Stopping java processes" | tee -a $LOG_FILE
+killall java 2>> $LOG_FILE
 
 echo "Starting Apache httpd" | tee -a $LOG_FILE
 httpd -f $HOME/httpd-root/conf/httpd.conf -k start 2>> $LOG_FILE
 echo "Apache httpd started" | tee -a $LOG_FILE
-
 sleep 1
 
 echo "Starting Java application" | tee -a $LOG_FILE
