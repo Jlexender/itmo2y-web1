@@ -2,18 +2,26 @@ $(document).ready(function() {
     const $r = $('#r');
     const $x = $('#x');
 
-    function populateSelectWithHTML($element, optionsHTML) {
+    function populateSelectWithFloats($element, optionsHTML) {
         $element.empty();
         $element.append('<option value="" disabled selected>Select</option>');
-        $element.append(optionsHTML); // Append the HTML from the server directly
+
+        const temp = $('<div>').html(optionsHTML);
+
+
+        temp.find('option').each(function() {
+            let value = parseFloat($(this).val()).toFixed(2);
+            let text = parseFloat($(this).text()).toFixed(2);
+
+            $element.append('<option value="' + value + '">' + text + '</option>');
+        });
     }
 
     $.ajax({
         url: '/fcgi-bin/server.jar?rSelector=1',
         type: 'GET',
         success: function(response) {
-            console.log(response)
-            populateSelectWithHTML($r, response);
+            populateSelectWithFloats($r, response);
         },
         error: function(xhr, status, error) {
             console.error('Failed to fetch R options: ' + error);
@@ -24,7 +32,7 @@ $(document).ready(function() {
         url: '/fcgi-bin/server.jar?xSelector=1',
         type: 'GET',
         success: function(response) {
-            populateSelectWithHTML($x, response);
+            populateSelectWithFloats($x, response);
         },
         error: function(xhr, status, error) {
             console.error('Failed to fetch X options: ' + error);
