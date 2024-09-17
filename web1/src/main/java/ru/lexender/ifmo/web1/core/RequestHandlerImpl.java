@@ -39,52 +39,52 @@ public class RequestHandlerImpl implements RequestHandler {
         var fcgiInterface = FcgiInterfaceHolder.getInstance();
 
         while (fcgiInterface.FCGIaccept() >= 0) {
-            Properties params = readRequestParams();
-            if (params.contains("xSelect")) {
-                StringBuilder sb = new StringBuilder();
-                for (var x: ValidationConfiguration.validX) {
-                    String t = "<option value=\"%f\">%f</option>".formatted(x, x);
-                    sb.append(t).append('\n');
-                }
-
-                String content = sb.toString();
-
-                String response = """
-                        HTTP/2 200 OK
-                        Content-Type: text/html
-                        Content-Length: %d
-                        
-                        %s
-                        
-                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
-
-                System.out.println(response);
-                continue;
-            }
-
-            if (params.contains("zSelect")) {
-                StringBuilder sb = new StringBuilder();
-                for (var z: ValidationConfiguration.validR) {
-                    String t = "<option value=\"%f\">%f</option>-->".formatted(z, z);
-                    sb.append(t).append('\n');
-                }
-
-                String content = sb.toString();
-
-                String response = """
-                        HTTP/2 200 OK
-                        Content-Type: text/html
-                        Content-Length: %d
-                        
-                        %s
-                        
-                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
-
-                System.out.println(response);
-                continue;
-            }
-
             try {
+                Properties params = readRequestParams();
+                if (params.contains("xSelect")) {
+                    StringBuilder sb = new StringBuilder();
+                    for (var x: ValidationConfiguration.validX) {
+                        String t = "<option value=\"%f\">%f</option>".formatted(x, x);
+                        sb.append(t).append('\n');
+                    }
+
+                    String content = sb.toString();
+
+                    String response = """
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                    System.out.println(response);
+                    continue;
+                }
+
+                if (params.contains("zSelect")) {
+                    StringBuilder sb = new StringBuilder();
+                    for (var z: ValidationConfiguration.validR) {
+                        String t = "<option value=\"%f\">%f</option>-->".formatted(z, z);
+                        sb.append(t).append('\n');
+                    }
+
+                    String content = sb.toString();
+
+                    String response = """
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                    System.out.println(response);
+                    continue;
+                }
+
                 var start = System.nanoTime();
 
                 String content = """
@@ -117,7 +117,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 System.out.println(response);
             } catch (Exception e) {
-                error("Can't process request");
+                error("Can't process request: " + e.getMessage());
             }
         }
     }
