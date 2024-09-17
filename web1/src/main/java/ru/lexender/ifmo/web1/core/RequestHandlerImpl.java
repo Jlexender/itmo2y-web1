@@ -57,6 +57,9 @@ public class RequestHandlerImpl implements RequestHandler {
                         %s
                         
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                System.out.println(response);
+                continue;
             }
 
             if (params.contains("zSelect")) {
@@ -76,6 +79,9 @@ public class RequestHandlerImpl implements RequestHandler {
                         %s
                         
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                System.out.println(response);
+                continue;
             }
 
             try {
