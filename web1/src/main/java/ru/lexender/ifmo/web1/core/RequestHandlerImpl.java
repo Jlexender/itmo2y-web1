@@ -64,7 +64,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 if (requestParams.containsKey("rSelector")) {
                     StringBuilder sb = new StringBuilder();
-                    for (var z: ValidationConfiguration.validR) {
+                    for (Double z: ValidationConfiguration.validR) {
                         sb.append("<option value=\"%f\">%f</option>".formatted(z, z));
                     }
                     String content = sb.toString();
