@@ -41,7 +41,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 String content = """
                         <td>%s</td>
-                        <td>%s</td>
+                        <td>%d</td>
                         """;
 
                 String requestBody = readRequestBody();
@@ -55,7 +55,7 @@ public class RequestHandlerImpl implements RequestHandler {
                 }
 
                 String result = contourService.isInsideContour(coordinates) ? "true" : "false";
-                var allTime = "%d ms".formatted(System.nanoTime() - start);
+                var allTime = System.nanoTime() - start;
                 content = content.formatted(result, allTime);
 
                 String response = """

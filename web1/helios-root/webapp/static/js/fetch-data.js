@@ -22,6 +22,7 @@ $(document).ready(function() {
         template.find('td').eq(3).text('Вычисляем...');
         template.find('td').eq(4).text(new Date().toLocaleString());
         template.find('td').eq(5).text('Вычисляем...');
+        template.find('td').eq(6).text('Вычисляем...');
         template.hide();
         $('.requestData tbody').append(template);
         template.fadeIn(500);
@@ -48,7 +49,7 @@ $(document).ready(function() {
 
                 template.find('td').eq(3).replaceWith(data);
                 template.find('td').eq(5).text(time + 'ms');
-                template.find('td').eq(6).text(sTime)
+                template.find('td').eq(6).text(sTime + 'ms')
             },
             error: function() {
                 template.find('td').eq(3).text('Ошибка').css('color', 'red');
