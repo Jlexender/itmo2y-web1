@@ -45,7 +45,7 @@ $(document).ready(function() {
                 const boolean = $(result).eq(0);
                 const sTime = $(result).eq(1);
 
-                insertPoint(x, y, r, data.result);
+                insertPoint(x, y, r, boolean);
 
                 template.find('td').eq(3).replaceWith(boolean);
                 template.find('td').eq(5).text(time + 'ms');
