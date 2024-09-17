@@ -40,6 +40,8 @@ $(document).ready(function() {
             success: function(data) {
                 const time = new Date().getTime() - startTime;
 
+
+                alert(data)
                 const result = $(data).find('td');
 
                 const boolean = $(result).eq(0);
