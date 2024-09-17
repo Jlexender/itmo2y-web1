@@ -41,6 +41,7 @@ public class RequestHandlerImpl implements RequestHandler {
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
                 Properties requestParams = readRequestParams();
+                String requestBody = readRequestBody();
                 if (requestParams.containsKey("xSelector")) {
                     StringBuilder sb = new StringBuilder();
                     for (var x: ValidationConfiguration.validX) {
@@ -88,8 +89,6 @@ public class RequestHandlerImpl implements RequestHandler {
                         <td>%s</td>
                         <td>%d</td>
                         """;
-
-                String requestBody = readRequestBody();
 
                 CoordinatesDto coordinates = ObjectMapperHolder
                         .getInstance().readValue(requestBody, CoordinatesDto.class);
