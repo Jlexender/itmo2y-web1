@@ -83,7 +83,9 @@ public class RequestHandlerImpl implements RequestHandler {
         message = message.replace("\n", " ");
 
         String content = """
-                <td>%s</td>
+                {
+                    "error": "%s"
+                }
                 """.formatted(message);
 
 
