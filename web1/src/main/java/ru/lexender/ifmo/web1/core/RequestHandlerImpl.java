@@ -113,7 +113,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
                 System.out.println(response);
             } catch (Exception e) {
-                error("Can't process request");
+                error("Can't process request" + e.getMessage());
             }
         }
     }
