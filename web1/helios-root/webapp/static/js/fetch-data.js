@@ -37,17 +37,23 @@ $(document).ready(function() {
                 r: r
             }),
             success: function(data) {
-                const endTime = new Date().getTime();
-                const time = endTime - startTime;
+                const time = new Date().getTime() - startTime;
+
+                const result = $(data).find('td');
+
+                const boolean = $(result).eq(0);
+                const sTime = $(result).eq(1);
 
                 insertPoint(x, y, r, data.result);
 
                 template.find('td').eq(3).replaceWith(data);
                 template.find('td').eq(5).text(time + 'ms');
+                template.find('td').eq(6).text(sTime)
             },
             error: function() {
                 template.find('td').eq(3).text('Ошибка').css('color', 'red');
                 template.find('td').eq(5).text('Ошибка').css('color', 'red');
+                template.find('td').eq(6).text('Ошибка').css('color', 'red');
             }
         });
     });

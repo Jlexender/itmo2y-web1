@@ -13,6 +13,7 @@ import ru.lexender.ifmo.web1.json.ObjectMapperHolder;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 
 /**
  * Implementation of the {@link RequestHandler} interface.
@@ -36,7 +37,12 @@ public class RequestHandlerImpl implements RequestHandler {
 
         while (fcgiInterface.FCGIaccept() >= 0) {
             try {
-                String content = "<td>%s</td>";
+                var start = System.nanoTime();
+
+                String content = """
+                        <td>%s</td>
+                        <td>%s</td>
+                        """;
 
                 String requestBody = readRequestBody();
 
@@ -49,15 +55,16 @@ public class RequestHandlerImpl implements RequestHandler {
                 }
 
                 String result = contourService.isInsideContour(coordinates) ? "true" : "false";
-                content = content.formatted(result);
+                var allTime = "%d ms".formatted(System.nanoTime() - start);
+                content = content.formatted(result, allTime);
 
                 String response = """
                         HTTP/2 200 OK
                         Content-Type: text/html
                         Content-Length: %d
-                                            
+                        
                         %s
-                                            
+                        
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
                 System.out.println(response);
@@ -81,9 +88,9 @@ public class RequestHandlerImpl implements RequestHandler {
                 HTTP/2 400 Bad Request
                 Content-Type: text/html
                 Content-Length: %d
-                                    
+                
                 %s
-                                    
+                
                 """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
         System.out.println(response);
