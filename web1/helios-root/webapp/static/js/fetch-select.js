@@ -9,7 +9,7 @@ $(document).ready(function() {
     }
 
     $.ajax({
-        url: '/fcgi-bin/server.jar?rParams=1',
+        url: '/fcgi-bin/server.jar?rSelector=1',
         type: 'GET',
         success: function(response) {
             console.log(response)
@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: '/fcgi-bin/server.jar?xParams=1',
+        url: '/fcgi-bin/server.jar?xSelector=1',
         type: 'GET',
         success: function(response) {
             populateSelectWithHTML($x, response);
