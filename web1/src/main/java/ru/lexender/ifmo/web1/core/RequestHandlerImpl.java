@@ -43,7 +43,7 @@ public class RequestHandlerImpl implements RequestHandler {
                 Properties requestParams = readRequestParams();
                 if (requestParams.contains("xSelector")) {
                     String content = """
-                        <option value="lol">kek</option>
+                        <option value="1">1</option>
                         """;
 
                     String response = """
