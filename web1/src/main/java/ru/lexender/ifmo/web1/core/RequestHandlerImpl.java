@@ -55,6 +55,7 @@ public class RequestHandlerImpl implements RequestHandler {
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
 
                 System.out.println(response);
+                continue;
             }
 
             try {
