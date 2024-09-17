@@ -24,7 +24,7 @@ $(document).ready(function() {
         template.find('td').eq(5).text('Вычисляем...');
         template.find('td').eq(6).text('Вычисляем...');
         template.hide();
-        $('.requestData tbody').append(template);
+        $('.requestData tbody').prepend(template);
         template.fadeIn(500);
         const startTime = new Date().getTime();
 
@@ -47,14 +47,14 @@ $(document).ready(function() {
 
                 insertPoint(x, y, r, data.result);
 
-                template.find('td').eq(3).replaceWith(data);
-                template.find('td').eq(5).text(time + 'ms');
-                template.find('td').eq(6).text(sTime + 'ms')
+                template.find('td').eq(4).replaceWith(data);
+                template.find('td').eq(6).text(time + 'ms');
+                template.find('td').eq(7).text(sTime + 'ms')
             },
             error: function() {
-                template.find('td').eq(3).text('Ошибка').css('color', 'red');
-                template.find('td').eq(5).text('Ошибка').css('color', 'red');
+                template.find('td').eq(4).text('Ошибка').css('color', 'red');
                 template.find('td').eq(6).text('Ошибка').css('color', 'red');
+                template.find('td').eq(7).text('Ошибка').css('color', 'red');
             }
         });
     });
