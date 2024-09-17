@@ -39,6 +39,24 @@ public class RequestHandlerImpl implements RequestHandler {
         var fcgiInterface = FcgiInterfaceHolder.getInstance();
 
         while (fcgiInterface.FCGIaccept() >= 0) {
+            Properties requestParams = readRequestParams();
+            if (requestParams.contains("xSelector")) {
+                String content = """
+                        <option value="lol">kek</option>
+                        """;
+
+                String response = """
+                        HTTP/2 200 OK
+                        Content-Type: text/html
+                        Content-Length: %d
+                        
+                        %s
+                        
+                        """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
+
+                System.out.println(response);
+            }
+
             try {
                 var start = System.nanoTime();
 
@@ -91,7 +109,7 @@ public class RequestHandlerImpl implements RequestHandler {
 
         var response = """
                 HTTP/2 400 Bad Request
-                Content-Type: text/html
+                Content-Type: application/json
                 Content-Length: %d
                 
                 %s
