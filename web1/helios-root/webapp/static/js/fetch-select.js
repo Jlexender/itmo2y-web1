@@ -3,17 +3,17 @@ $(document).ready(function() {
     const $x = $('#x');
 
     function populateSelectWithFloats($element, optionsHTML) {
-        $element.empty();
-        $element.append('<option value="" disabled selected>Select</option>');
-
         const temp = $('<div>').html(optionsHTML);
 
-
         temp.find('option').each(function() {
-            let value = parseFloat($(this).val()).toFixed(2);
-            let text = parseFloat($(this).text()).toFixed(2);
+            let value = parseFloat($(this).val());
+            let text = parseFloat($(this).text());
 
-            $element.append('<option value="' + value + '">' + text + '</option>');
+            // Display up to 2 decimal places only if necessary
+            let formattedValue = (value % 1 === 0) ? value : value.toFixed(2);
+            let formattedText = (text % 1 === 0) ? text : text.toFixed(2);
+
+            $element.append('<option value="' + formattedValue + '">' + formattedText + '</option>');
         });
     }
 
