@@ -1,0 +1,6 @@
+[submodule "pl1"]
+	path = pl1
+	url = https://gitlab.se.ifmo.ru/Jlexender/assignment-1-io-library
+[submodule "pl2"]
+	path = pl2
+	url = https://gitlab.se.ifmo.ru/Jlexender/assignment-2-dictionary
