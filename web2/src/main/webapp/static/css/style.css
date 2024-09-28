@@ -115,6 +115,17 @@ canvas#canvas {
     margin-top: 20px;
 }
 
+.requestData td, .requestData th {
+    color: #000000;
+    background: linear-gradient(90deg, #ff6f61, #ffcc00, #6fa3ef);
+}
+
+.requestData {
+    background-image: url('../img/hk.webp');
+    background-size: 50px 50px; /* Set the background image size to smaller value */
+    background-repeat: repeat;
+}
+
 th, td {
     border: 2px solid #ffcc00;
     padding: 10px;
