@@ -1,3 +1,4 @@
+// Updated `fetch-data.js`
 $(document).ready(function() {
     drawPlot();
 
@@ -12,7 +13,7 @@ $(document).ready(function() {
 
         const template = $('template').contents().clone();
 
-        const x = parseFloat($('#x').val());
+        const x = parseFloat($('input[name="x"]:checked').val());
         const y = parseFloat($('#y').val());
         const r = parseFloat($('#r').val());
 
@@ -29,27 +30,24 @@ $(document).ready(function() {
         const startTime = new Date().getTime();
 
         $.ajax({
-            url: '/fcgi-bin/server.jar',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
+            url: '/query',
+            type: 'GET',
+            data: {
                 x: x,
                 y: y,
                 r: r
-            }),
+            },
             success: function(data) {
                 const time = new Date().getTime() - startTime;
 
-                const result = $(data).filter('td');
+                const result = data.result;
+                const executionTime = data.executionTime;
 
-                const boolean = $(result).eq(0).text();
-                const sTime = $(result).eq(1).text();
+                insertPoint(x, y, r, result);
 
-                insertPoint(x, y, r, boolean);
-
-                template.find('td').eq(3).text(boolean);
+                template.find('td').eq(3).text(result);
                 template.find('td').eq(5).text(time + 'ms');
-                template.find('td').eq(6).text(sTime + 'ns');
+                template.find('td').eq(6).text(executionTime + 'ns');
             },
             error: function() {
                 template.find('td').eq(3).text('Ошибка').css('color', 'red');

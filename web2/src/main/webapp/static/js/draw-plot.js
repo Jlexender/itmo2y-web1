@@ -1,8 +1,9 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+ctx.lineWidth = 4;
+ctx.strokeStyle = 'rgb(0,255,196)';
+ctx.fillStyle = 'rgb(0,255,208)';
 
 const radius = 200;
 
@@ -31,13 +32,13 @@ function drawArrows() {
 }
 
 keyPoints = [
-    {x: radius/2, y: 0},
-    {x: radius/2, y: -radius},
-    {x: 0, y: -radius},
-    {x: 0, y: -radius/2},
-    {x: -radius, y: 0},
+    {x: 0, y: radius/2},
+    {x: radius, y: radius/2},
+    {x: radius, y: 0},
     {x: 0, y: 0},
-    {x: 0, y: radius/2}
+    {x: 0, y: -radius},
+    {x: -radius/2, y: 0},
+    {x: 0, y: 0}
 ];
 
 function drawBrokenPath() {
@@ -48,13 +49,13 @@ function drawBrokenPath() {
 }
 
 function drawArc() {
-    ctx.arc(canvas.width / 2, canvas.height / 2, radius/2, 3*Math.PI/2, 0);
+    ctx.arc(canvas.width / 2, canvas.height / 2, radius/2, Math.PI, 3*Math.PI/2);
 }
 
 function drawPlot() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = 'rgba(105, 125, 255, 0.3)';
+    ctx.fillStyle = 'rgba(188,255,87,0.8)';
 
     ctx.beginPath();
     drawAxis();
@@ -77,9 +78,9 @@ labels = [
 ]
 
 function drawLabels() {
-    ctx.font = '18px serif';
+    ctx.font = 'bold 24px serif';
     const old = ctx.fillStyle;
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'magenta';
 
     for (let i = 0; i < labels.length; i++) {
         ctx.fillText(labels[i].text, canvas.width / 2 + labels[i].x + 5, canvas.height / 2 - labels[i].y - 5);
@@ -112,9 +113,9 @@ function drawPoints() {
 
 function drawPoint(point) {
     let old = ctx.fillStyle;
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'red';
     ctx.beginPath();
-    ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
+    ctx.arc(point.x, point.y, 6, 0, 2 * Math.PI);
     ctx.fill();
     ctx.fillStyle = old;
 }

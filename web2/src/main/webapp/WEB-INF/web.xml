@@ -9,12 +9,16 @@
 
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>ru.lexender.ifmo.web2.servlet.ControllerServlet</servlet-class>
+        <servlet-class>ru.lexender.ifmo.web2.core.servlet.ControllerServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/aboba</url-pattern>
+        <url-pattern>/query</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
 </web-app>

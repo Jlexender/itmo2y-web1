@@ -1,154 +1,115 @@
 @import url('https://fonts.googleapis.com/css2?family=Impact&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap');
 
+/* Keyframes for animations */
 @keyframes gradient-animation {
-    0% {
-        background-position: 0 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0 50%;
-    }
-}
-
-header {
-    display: flex;
-    position: fixed; /* Делаем заголовок фиксированным */
-    top: 0; /* Устанавливаем заголовок в самый верх */
-    width: 100%;
-    height: 300px; /* Высота заголовка */
-    background: linear-gradient(270deg, #ff6f61, #ffcc00, #6fa3ef);
-    background-size: 400% 400%;
-    animation: gradient-animation 3s ease infinite;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    align-items: flex-start; /* Выравнивание содержимого по верху */
-    padding: 20px 0; /* Паддинг только сверху и снизу */
-    z-index: 1000; /* Убедитесь, что заголовок выше остальных элементов */
-}
-
-.header-text {
-    background-image: url('../img/ton-logo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 30vw;
-    height: 300px; /* Высота текстового блока */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Выравнивание текста по верху */
-    align-items: center;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-}
-
-.header-image {
-    width: 70vw;
-    height: 300px;
-    border-radius: 15px;
-    animation: bounce 2s infinite;
-}
-
-img:hover {
-    filter: brightness(1.2) contrast(1.5) saturate(1.2); /* Example filters */
-    transition: filter 0.3s ease; /* Smooth transition */
+    0% { background-position: 0 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-20px);
-    }
-    60% {
-        transform: translateY(-10px);
-    }
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
 }
 
-img {
-    width: 80vw;
-    height: auto;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
+/* Basic styling */
 body {
     background-image: url('../img/ton-logo.png');
     background-repeat: repeat;
     background-size: 70px;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     color: #333;
 }
 
 main {
-    margin-top: 330px; /* Отступ ниже фиксированного заголовка */
+    margin-top: 330px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    gap: 20px;
+    justify-content: flex-start; /* Align items to the start */
+}
+
+/* Flexbox to align .plotData and table horizontally */
+.plotData, .requestData {
+    flex: 1;
+    max-width: 48%;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
-@keyframes rainbow-animation {
-    0% {
-        background-position: 0 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0 50%;
-    }
-}
-
 .plotData {
-    /* image source */
     background-image: url('../img/bitok.jpeg');
-    /* background size */
     background-size: cover;
-
     opacity: 0.9;
-    padding: 20px; /* Add some padding for aesthetics */
-    border-radius: 8px; /* Optional: round the corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
-    color: white; /* Change text color for better visibility */
+    color: white;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Custom cursor styling */
-.custom-cursor {
-    position: absolute; /* Position absolutely to follow the mouse */
-    pointer-events: none; /* Make sure it doesn't interfere with clicking */
-    z-index: 9999; /* High z-index to be above all other elements */
-    display: none; /* Initially hidden */
+.plotData form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-h1 {
-    font-size: 2.5rem;
-    color: #ff6f61;
+.plotData label {
+    font-size: 28px;
+    color: #ff0099;
 }
 
-.credentials ul {
-    list-style: none;
-    padding: 0;
+#x {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.credentials li {
-    margin: 5px 0;
-    font-weight: bold;
-    color: #ffcc00;
+#x input[type="radio"], #x label {
+    margin-right: 5px;
 }
 
-button {
-    background-color: #ff6f61;
+#y, #r {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button#submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #ffcc00;
+button#submit:hover {
+    background-color: #45a049;
 }
 
-table {
+canvas#canvas {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%; /* Ensures the canvas fits within the .plotData container */
+}
+
+/* Table styling */
+.requestData table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -165,80 +126,129 @@ th {
     color: white;
 }
 
+/* Header styling with animated gradient */
+header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(270deg, #ff6f61, #ffcc00, #6fa3ef);
+    background-size: 400% 400%;
+    animation: gradient-animation 3s ease infinite;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+.header-text {
+    background-image: url('../img/ton-logo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30vw;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.header-image {
+    width: 70vw;
+    height: 300px;
+    border-radius: 15px;
+    animation: bounce 2s infinite;
+}
+
+img:hover {
+    filter: brightness(1.2) contrast(1.5) saturate(1.2);
+    transition: filter 0.3s ease;
+}
+
+/* Custom cursor and other interactive elements */
+.custom-cursor, .tg-logo {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+}
+
+.custom-cursor img, .tg-logo img {
+    width: 50px;
+    height: auto;
+}
+
+.tg-logo img {
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* Button styling */
+button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffcc00;
+}
+
+/* Toncoin section */
 .toncoin {
     text-align: center;
     margin-top: 20px;
 }
 
-
-/* Custom cursor styling */
-.custom-cursor {
-    position: absolute; /* Position absolutely to follow the mouse */
-    pointer-events: none; /* Make sure it doesn't interfere with clicking */
-    z-index: 9999; /* High z-index to be above all other elements */
-    display: none; /* Initially hidden */
-}
-
-.custom-cursor img {
-    width: 50px; /* Set the width of the cursor image */
-    height: auto; /* Maintain aspect ratio */
-}
-
-/* TG Logo styling */
-.tg-logo {
-    position: absolute; /* Position absolutely to follow the mouse */
-    pointer-events: none; /* Make sure it doesn't interfere with clicking */
-    z-index: 9999; /* High z-index to be above all other elements */
-    display: none; /* Initially hidden */
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.tg-logo img {
-    width: 50px; /* Set the width of the logo image */
-    height: auto; /* Maintain aspect ratio */
-    animation: spin 1s ease-in-out infinite; /* Add a spinning animation */
-}
-
 .nyan-cat img {
-    width: 400px; /* Ensure the image takes the full width of the container */
-    height: auto; /* Maintain aspect ratio */
+    width: 400px;
+    height: auto;
 }
 
-/* Footer styling */
+/* Footer styles */
 footer {
-    position: relative; /* Ensure the footer is positioned relative for absolute positioning inside it */
-    overflow: hidden; /* Hide overflow to ensure the Nyan Cat doesn't show outside the footer */
-    background-color: #f9f9f9; /* Light background color */
-    font-family: 'Impact', sans-serif; /* Use the meme-like font */
-    text-align: center; /* Center-align text */
-    padding: 20px; /* Add padding for spacing */
+    position: relative;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    font-family: 'Impact', sans-serif;
+    text-align: center;
+    padding: 20px;
     background-image: url('../img/dima.webp');
     background-repeat: no-repeat;
-    background-size: 100% 400px; /* Растягивает изображение по высоте, сохраняя пропорции по ширине */
+    background-size: 100% 400px;
 }
 
 footer p {
-    font-size: 2rem; /* Large font size for meme effect */
-    color: #13ff00; /* Bright color for meme effect */
-    margin: 10px 0; /* Margin for spacing */
+    font-size: 2rem;
+    color: #13ff00;
+    margin: 10px 0;
 }
 
 footer a {
-    color: #ffcc00; /* Bright color for links */
-    text-decoration: none; /* Remove underline from links */
-    font-size: 1.5rem; /* Large font size for links */
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 1.5rem;
 }
 
 footer a:hover {
-    text-decoration: underline; /* Underline links on hover */
+    text-decoration: underline;
 }
 
+/* Добавляем стили для draggable таблицы */
+#draggableTable {
+    position: absolute; /* Положение таблицы становится абсолютным для перемещения */
+    cursor: move;       /* Курсор указывает на возможность перемещения */
+    z-index: 1000;      /* Устанавливаем высокий z-index, чтобы таблица была поверх других элементов */
+    background-color: #fff; /* Задний фон для лучшего отображения */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease;
+}
 
