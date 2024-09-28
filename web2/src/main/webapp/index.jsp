@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index of Web1</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/static/css/style.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/static/css/normalize.css">
-    <script src="<%= request.getContextPath() %>/static/js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/normalize.css">
+    <script src="<%= request.getContextPath() %>/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <div class="container">
     <header>
         <a href="#" class="header-image-link">
-            <img src="<%= request.getContextPath() %>/static/img/kombat.webp" alt="Kombat" class="header-image">
+            <img src="<%= request.getContextPath() %>/resources/img/kombat.webp" alt="Kombat" class="header-image">
         </a>
         <div class="header-text">
             <h1>Веб-программирование 2</h1>
@@ -84,34 +84,34 @@
 
         <div class="toncoin">
             <h1 class="ton-price">TON Price прогноз</h1>
-            <img src="<%= request.getContextPath() %>/static/img/price.jpeg" alt="TON Coin" class="ton-coin-img">
+            <img src="<%= request.getContextPath() %>/resources/img/price.jpeg" alt="TON Coin" class="ton-coin-img">
         </div>
     </main>
 </div>
 
 <video id="background-video" loop style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-    <source src="<%= request.getContextPath() %>/static/vid/nazar.mp4" type="video/mp4">
+    <source src="<%= request.getContextPath() %>/resources/vid/nazar.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
 <div class="tg-logo" id="tg-logo">
-    <img src="<%= request.getContextPath() %>/static/img/tg-logo.webp" alt="TG Logo">
+    <img src="<%= request.getContextPath() %>/resources/img/tg-logo.webp" alt="TG Logo">
 </div>
 
 <footer>
-    <img src="<%= request.getContextPath() %>/static/img/vt.png" alt="IFMO LOGO" style="width: 100px; height: 100px" id="ifmo">
+    <img src="<%= request.getContextPath() %>/resources/img/vt.png" alt="IFMO LOGO" style="width: 100px; height: 100px" id="ifmo">
     <p>© 2024 Empire of Unstoppable Innovations.
         All rights reserved, including but not limited to the rights of unparalleled creativity,
         extraordinary concepts, and infinite brilliance. Any unauthorized reproduction
         shall be met with epic failure!</p>
     <div class="nyan-cat">
-        <img src="<%= request.getContextPath() %>/static/img/nyan.gif" alt="Nyan Cat">
+        <img src="<%= request.getContextPath() %>/resources/img/nyan.gif" alt="Nyan Cat">
     </div>
 </footer>
 
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/draw-plot.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/fetch-data.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/static/js/table-drag.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/draw-plot.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/fetch-data.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/table-drag.js"></script>
 <script>
     $(document).ready(function() {
         const $backgroundVideo = $('#background-video');

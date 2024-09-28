@@ -1,14 +1,14 @@
 package ru.lexender.ifmo.web2.core.servlet;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.json.JSONObject;
 import ru.lexender.ifmo.web2.core.service.AreaCheckService;
 import ru.lexender.ifmo.web2.core.service.ValidationService;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
