@@ -53,6 +53,7 @@
             </form>
 
             <canvas id="canvas" width="500" height="500"></canvas>
+
         </div>
 
         <table class="requestData">
@@ -110,58 +111,10 @@
 </footer>
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/draw-plot.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/fetch-data.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/fetch-canvas-click.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/table-drag.js"></script>
-<script>
-    $(document).ready(function() {
-        const $backgroundVideo = $('#background-video');
-        const $tgLogo = $('#tg-logo');
-
-        $backgroundVideo.hide();
-
-        $(document).mousemove(function(e) {
-            $tgLogo.css({
-                left: e.pageX - 10,
-                top: e.pageY - 10
-            }).show();
-        });
-
-        $(document).mouseleave(function() {
-            $tgLogo.hide();
-        });
-
-        $('.header-image-link').click(function(event) {
-            event.preventDefault();
-
-            if ($backgroundVideo.is(':hidden')) {
-                $backgroundVideo.show();
-                $backgroundVideo[0].play();
-            }
-        });
-    });
-</script>
-<script>
-    document.getElementById('r').addEventListener('input', function(event) {
-        const newR = parseFloat(event.target.value);
-        refreshLabels(newR);
-        refreshPoints(newR); // Update points based on new R value
-        drawPlot();
-    });
-
-    function refreshLabels(R) {
-        labels[1].text = R / 2;
-        labels[2].text = -R;
-        labels[3].text = -R / 2;
-        labels[4].text = -R;
-        labels[6].text = R / 2;
-    }
-
-    function refreshPoints(newR) {
-        for (let i = 0; i < points.length; i++) {
-            points[i].x = canvas.width / 2 + points[i].realX * radius / newR;
-            points[i].y = canvas.height / 2 - points[i].realY * radius / newR;
-        }
-    }
-</script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/secret-video.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/fetch-submit-button.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/canvas-refresh-on-r.js"></script>
 </body>
 </html>

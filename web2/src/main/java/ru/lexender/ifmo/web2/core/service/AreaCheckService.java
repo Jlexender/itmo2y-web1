@@ -5,7 +5,7 @@ public class AreaCheckService {
         if (x >= 0 && y >= 0) {
             return x <= r && y <= r/2;
         } else if (x <= 0 && y >= 0) {
-            return x * x + y * y <= r * r;
+            return x * x + y * y <= r * r / 4;
         } else if (x <= 0 && y <= 0) {
             return y >= -2 * x - r;
         } else {

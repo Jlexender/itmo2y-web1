@@ -1,0 +1,27 @@
+2024-09-30 05:31:53,350 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-7) WFLYDS0013: Started FileSystemDeploymentService for directory /home/alex/Code/ifmo/web2/wildfly/standalone/deployments
+2024-09-30 05:31:53,438 INFO  [org.jboss.ws.common.management] (MSC service thread 1-4) JBWS022052: Starting JBossWS 7.0.0.Final (Apache CXF 4.0.0) 
+2024-09-30 05:31:53,979 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 82) WFLYUT0021: Registered web context: '/' for server 'default-server'
+2024-09-30 05:31:53,979 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 81) WFLYUT0021: Registered web context: '/web2-1.0-SNAPSHOT' for server 'default-server'
+2024-09-30 05:31:54,022 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0010: Deployed "web2-1.0-SNAPSHOT.war" (runtime-name : "web2-1.0-SNAPSHOT.war")
+2024-09-30 05:31:54,023 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 45) WFLYSRV0010: Deployed "ROOT.war" (runtime-name : "ROOT.war")
+2024-09-30 05:31:54,061 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0212: Resuming server
+2024-09-30 05:31:54,064 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
+2024-09-30 05:31:54,065 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+2024-09-30 05:31:54,066 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 30.0.0.Final (WildFly Core 22.0.1.Final) started in 2535ms - Started 438 of 660 services (327 services are lazy, passive or on-demand) - Server configuration file in use: standalone.xml
+2024-09-30 05:33:19,548 INFO  [org.jboss.as.server] (Thread-1) WFLYSRV0272: Suspending server
+2024-09-30 05:33:19,551 INFO  [org.jboss.as.ejb3] (Thread-1) WFLYEJB0493: Jakarta Enterprise Beans subsystem suspension complete
+2024-09-30 05:33:19,553 INFO  [org.jboss.as.server] (Thread-1) WFLYSRV0220: Server shutdown has been requested via an OS signal
+2024-09-30 05:33:19,562 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0002: Unbound mail session [java:jboss/mail/Default]
+2024-09-30 05:33:19,563 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 81) WFLYUT0022: Unregistered web context: '/' from server 'default-server'
+2024-09-30 05:33:19,563 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 85) WFLYUT0022: Unregistered web context: '/web2-1.0-SNAPSHOT' from server 'default-server'
+2024-09-30 05:33:19,566 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0019: Host default-host stopping
+2024-09-30 05:33:19,566 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-1) WFLYJCA0010: Unbound data source [java:jboss/datasources/ExampleDS]
+2024-09-30 05:33:19,567 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0019: Stopped Driver service with driver-name = h2
+2024-09-30 05:33:19,587 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0008: Undertow HTTP listener default suspending
+2024-09-30 05:33:19,587 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0008: Undertow HTTPS listener https suspending
+2024-09-30 05:33:19,588 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0007: Undertow HTTP listener default stopped, was bound to 127.0.0.1:8080
+2024-09-30 05:33:19,588 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0007: Undertow HTTPS listener https stopped, was bound to 127.0.0.1:8443
+2024-09-30 05:33:19,589 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0004: Undertow 2.3.10.Final stopping
+2024-09-30 05:33:19,597 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) WFLYSRV0028: Stopped deployment web2-1.0-SNAPSHOT.war (runtime-name: web2-1.0-SNAPSHOT.war) in 41ms
+2024-09-30 05:33:19,601 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-7) WFLYSRV0028: Stopped deployment ROOT.war (runtime-name: ROOT.war) in 44ms
+2024-09-30 05:33:19,608 INFO  [org.jboss.as] (MSC service thread 1-8) WFLYSRV0050: WildFly Full 30.0.0.Final (WildFly Core 22.0.1.Final) stopped in 51ms

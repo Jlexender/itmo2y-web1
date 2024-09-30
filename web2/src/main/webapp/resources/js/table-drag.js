@@ -1,30 +1,35 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const table = document.getElementById('draggableTable');
+$(document).ready(function() {
+    const $plotData = $('.plotData'); // Получаем элемент .plotData
     let isDragging = false;
     let offsetX, offsetY;
 
-    table.addEventListener('mousedown', function (e) {
-        // Начинаем перетаскивание
+    // Начало перетаскивания
+    $plotData.on('mousedown', function(e) {
         isDragging = true;
-        offsetX = e.clientX - table.getBoundingClientRect().left;
-        offsetY = e.clientY - table.getBoundingClientRect().top;
-        table.style.cursor = 'grabbing'; // Изменяем курсор при захвате
+        offsetX = e.clientX - $plotData.offset().left;
+        offsetY = e.clientY - $plotData.offset().top;
+        $plotData.css('cursor', 'grabbing'); // Изменение курсора на перетаскивание
     });
 
-    document.addEventListener('mousemove', function (e) {
+    // Движение мыши
+    $(document).on('mousemove', function(e) {
         if (isDragging) {
-            // Рассчитываем новое положение таблицы
             const x = e.clientX - offsetX;
             const y = e.clientY - offsetY;
 
-            table.style.left = `${x}px`;
-            table.style.top = `${y}px`;
+            $plotData.css({
+                position: 'absolute',
+                left: `${x}px`,
+                top: `${y}px`
+            });
         }
     });
 
-    document.addEventListener('mouseup', function () {
-        // Останавливаем перетаскивание
-        isDragging = false;
-        table.style.cursor = 'move'; // Возвращаем курсор
+    // Остановка перетаскивания
+    $(document).on('mouseup', function() {
+        if (isDragging) {
+            isDragging = false;
+            $plotData.css('cursor', 'default'); // Возвращаем курсор
+        }
     });
 });
