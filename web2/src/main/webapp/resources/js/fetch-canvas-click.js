@@ -45,6 +45,13 @@ $(document).ready(function() {
                 template.find('td').eq(3).text(result ? '+1 HMSTR' : 'Слил казик');
                 template.find('td').eq(5).text((performance.now() - startTime).toFixed(2) + ' мс');
                 template.find('td').eq(6).text(data.executionTime + ' нс');
+                if (result) {
+                    const audio = new Audio('/resources/mp3/probitie1.mp3');
+                    audio.play();
+                } else {
+                    const audio = new Audio('/resources/mp3/ne-probil.mp3');
+                    audio.play();
+                }
                 insertPoint(realX, realY, radius);
             },
             error: function() {
