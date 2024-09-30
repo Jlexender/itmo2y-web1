@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     $('#canvas').on('click', function(event) {
         radius = parseFloat($('#r').val());
-        if (isNaN(radius) || radius <= 0 || radius > 4) {
+        if (isNaN(radius) || radius < 1 || radius > 4) {
             alert('Радиус не установлен или некорректен.');
             return;
         }
